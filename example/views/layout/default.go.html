@@ -1,0 +1,16 @@
+@{
+  +func (body, js razor.SafeBuffer, title string)
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@title</title>
+    <link rel="stylesheet" href="/{{version}}/css/style.css">
+</head>
+<body>
+    <div class="container">@body</div>
+    @js
+  </body>
+</html>
