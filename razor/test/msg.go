@@ -7,7 +7,7 @@ import (
 	. "kp/models"
 )
 
-//Msg is generated
+// Msg is generated
 func Msg() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var u *User

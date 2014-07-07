@@ -9,7 +9,7 @@ import (
 	. "zfw/tplhelper"
 )
 
-//Scopebug is generated
+// Scopebug is generated
 func Scopebug() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var obj *models.Widget

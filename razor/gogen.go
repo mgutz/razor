@@ -286,7 +286,7 @@ func (cp *Compiler) visit() {
 	}
 
 	// adds comment to generated to appease golint
-	head += "\n)\n//" + fun + " is generated\nfunc " + fun + cp.params
+	head += "\n)\n// " + fun + " is generated\nfunc " + fun + cp.params
 	head += " razor.SafeBuffer {\n _buffer := razor.NewSafeBuffer()\n"
 	cp.buf = head + cp.buf
 	cp.processLayout()

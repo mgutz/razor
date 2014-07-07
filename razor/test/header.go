@@ -6,7 +6,7 @@ import (
 	"github.com/mgutz/razor/razor"
 )
 
-//Header is generated
+// Header is generated
 func Header() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	_buffer.WriteString("<div>Page Header</div>")

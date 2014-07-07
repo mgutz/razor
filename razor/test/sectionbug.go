@@ -8,7 +8,7 @@ import (
 	"tpl/admin/layout"
 )
 
-//Sectionbug is generated
+// Sectionbug is generated
 func Sectionbug() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 

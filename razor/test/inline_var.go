@@ -7,7 +7,7 @@ import (
 	"github.com/sunfmin/gorazortests/models"
 )
 
-//Inline_var is generated
+// Inline_var is generated
 func Inline_var() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	_buffer.WriteString("\n\n<body>")

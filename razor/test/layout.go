@@ -6,7 +6,7 @@ import (
 	"github.com/mgutz/razor/razor"
 )
 
-//Layout is generated
+// Layout is generated
 func Layout() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var body string

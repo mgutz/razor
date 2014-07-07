@@ -7,7 +7,7 @@ import (
 	"github.com/mgutz/razor/razor"
 )
 
-//Forward is generated
+// Forward is generated
 func Forward() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var content string

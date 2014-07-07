@@ -6,7 +6,7 @@ import (
 	"github.com/mgutz/razor/razor"
 )
 
-//Bug is generated
+// Bug is generated
 func Bug() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	_buffer.WriteString("<html>\n  <head>\n    <title>Title</title>\n  </head>\n\n  <body>\n  Body\n  </body>\n</html>")

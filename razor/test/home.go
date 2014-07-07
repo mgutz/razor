@@ -9,7 +9,7 @@ import (
 	"tpl/helper"
 )
 
-//Home is generated
+// Home is generated
 func Home() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var totalMessage int

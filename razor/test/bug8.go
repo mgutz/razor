@@ -6,7 +6,7 @@ import (
 	"github.com/mgutz/razor/razor"
 )
 
-//Bug8 is generated
+// Bug8 is generated
 func Bug8() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var l *Locale

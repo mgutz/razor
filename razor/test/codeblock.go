@@ -6,7 +6,7 @@ import (
 	"github.com/mgutz/razor/razor"
 )
 
-//Codeblock is generated
+// Codeblock is generated
 func Codeblock() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 

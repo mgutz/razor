@@ -9,7 +9,7 @@ import (
 	"tpl/helper"
 )
 
-//End is generated
+// End is generated
 func End() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var totalMessage int

@@ -6,7 +6,7 @@ import (
 	"github.com/mgutz/razor/razor"
 )
 
-//Var is generated
+// Var is generated
 func Var() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var totalMessage int

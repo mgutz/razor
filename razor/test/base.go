@@ -7,7 +7,7 @@ import (
 	"tpl/admin/helper"
 )
 
-//Base is generated
+// Base is generated
 func Base() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var body string

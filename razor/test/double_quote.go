@@ -6,7 +6,7 @@ import (
 	"github.com/mgutz/razor/razor"
 )
 
-//Double_quote is generated
+// Double_quote is generated
 func Double_quote() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	_buffer.WriteString("<meta charset=\"utf-8\" />")

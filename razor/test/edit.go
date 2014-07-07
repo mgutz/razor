@@ -8,7 +8,7 @@ import (
 	"tpl/admin/layout"
 )
 
-//Edit is generated
+// Edit is generated
 func Edit() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var u *models.User

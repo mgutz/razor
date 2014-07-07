@@ -6,7 +6,7 @@ import (
 	"github.com/mgutz/razor/razor"
 )
 
-//Keyword is generated
+// Keyword is generated
 func Keyword() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	_buffer.WriteString("BLK(<span>rememberingsteve@apple.com ")

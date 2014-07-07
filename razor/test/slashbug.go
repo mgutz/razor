@@ -8,7 +8,7 @@ import (
 	"zfw/models"
 )
 
-//Slashbug is generated
+// Slashbug is generated
 func Slashbug(objs ...*models.Widget) razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 

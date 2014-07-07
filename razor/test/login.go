@@ -6,7 +6,7 @@ import (
 	"github.com/mgutz/razor/razor"
 )
 
-//Login is generated
+// Login is generated
 func Login() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var msg string

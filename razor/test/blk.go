@@ -6,7 +6,7 @@ import (
 	"github.com/mgutz/razor/razor"
 )
 
-//Blk is generated
+// Blk is generated
 func Blk() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 

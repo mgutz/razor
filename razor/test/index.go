@@ -8,7 +8,7 @@ import (
 	"kp/models"
 )
 
-//Index is generated
+// Index is generated
 func Index() razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var users []*models.User

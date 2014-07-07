@@ -6,7 +6,7 @@ import (
 	"github.com/mgutz/razor/razor"
 )
 
-//Badtag is generated
+// Badtag is generated
 func Badtag(w *gorazor.Widget) razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	if w.ErrorMsg != "" {

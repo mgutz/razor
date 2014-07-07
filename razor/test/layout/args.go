@@ -8,7 +8,7 @@ import (
 	"zfw/models"
 )
 
-//Args is generated
+// Args is generated
 func Args(...*models.Widget) razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 

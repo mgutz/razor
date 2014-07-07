@@ -9,7 +9,7 @@ import (
 	"tpl/helper"
 )
 
-//Argsbug is generated
+// Argsbug is generated
 func Argsbug(totalMessage int, u *User) razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 
