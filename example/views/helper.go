@@ -17,3 +17,7 @@ func SafeHello(name string) razor.SafeBuffer {
 	buffer.WriteString("</i>!")
 	return buffer
 }
+
+func Heading2(name string) razor.SafeBuffer {
+	return razor.NewSafeBufferString("<h2>" + name + "</h2>")
+}

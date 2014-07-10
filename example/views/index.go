@@ -9,20 +9,17 @@ import (
 	"github.com/mgutz/razor/razor"
 )
 
-//Index is generated
+// Index is generated
 func Index(user *models.User) razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	title := "Cool Site"
-	_buffer.WriteSafe(html.Raw(`
-<div style='background-color: #00F; color: #fff;'>
-Why so blue?
-</div>
-`))
+	title := "Razor + Go love"
+	_buffer.WriteString("\n\n<!-- helper.go is in same package -->")
+	_buffer.WriteSafe(Heading2("Razor rocks"))
 	_buffer.WriteString("\n\n<p>Escaped: ")
 	_buffer.WriteSafe(UnsafeHello(user.Name))
 	_buffer.WriteString("</p>\n<p>Unescaped: ")
 	_buffer.WriteSafe(SafeHello(user.Name))
-	_buffer.WriteString("</p>")
+	_buffer.WriteString("</p>\n\n<!-- avoid using Raw, create a function that returns SafeBuffer instead -->")
 	_buffer.WriteSafe(html.Raw("<h2>Heading 2</h2>"))
 
 	js := func() razor.SafeBuffer {

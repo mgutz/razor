@@ -16,6 +16,10 @@ func NewSafeBuffer() SafeBuffer {
 	return SafeBuffer{Buffer: bytes.NewBuffer(nil)}
 }
 
+func NewSafeBufferString(s string) SafeBuffer {
+	return SafeBuffer{Buffer: bytes.NewBufferString(s)}
+}
+
 func (self SafeBuffer) WriteTo(w io.Writer) {
 	self.Buffer.WriteTo(w)
 }

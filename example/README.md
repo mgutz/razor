@@ -1,23 +1,9 @@
 # gorazor Example
 
-Reuilding the views in-place
+Reuilding the views with gosu manually
 
-    razor views views
+    go run gosu.go views
 
-## Rebuilding views automatically
+Reuilding the views with gosu automatically
 
-Requires [node.js](http://nodejs.org) for auto building.
-
-Install gulp and deps
-
-    # inside of example dir
-    npm install gulp -g
-    npm install
-
-Building the views with gulp
-
-    gulp views
-
-Watch for `views/**/*.gohtml`changes and rebuild
-
-    gulp watch
+    go run gosu.go --watch views

@@ -9,14 +9,14 @@ safe and escapes all values by default.
 Install
 
 ```sh
-go get github.com/mgutz/gorazor
+go get github.com/mgutz/razor
 ```
 
 Running
 
 ```sh
-gorazor template_folder output_folder
-gorazor template_file output_file
+razor template_folder output_folder
+razor template_file output_file
 ```
 
 ## Layout & Views

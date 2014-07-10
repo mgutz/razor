@@ -6,7 +6,7 @@ import (
 	"github.com/mgutz/razor/razor"
 )
 
-//Default is generated
+// Default is generated
 func Default(body, js razor.SafeBuffer, title string) razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	_buffer.WriteString("\n\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\" />\n    <title>")
