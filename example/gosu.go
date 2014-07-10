@@ -6,7 +6,7 @@ import (
 )
 
 func Project(p *gosu.Project) {
-	p.Task("default", []string{"views", "styles"})
+	p.Task("default", []string{"views"})
 
 	p.Task("views", gosu.Files{"views/**/*.go.html"}, func() {
 		util.Exec("razor views views")
