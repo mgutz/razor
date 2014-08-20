@@ -1,8 +1,8 @@
 # razor
 
-`razor` is a Go port of ASP.NET's Razor view engine.  `razor` is a code
-generator which compiles Razor templates into Go functions. It is fast, type
-safe and escapes all values by default.
+**razor** is a Go port of ASP.NET's Razor view engine with less magic.
+**razor** is a code generator which compiles Razor templates into a Go package of template functions.
+**razor** is fast, reflection-less and escapes all values by default.
 
 ## Usage
 
@@ -20,7 +20,7 @@ razor <folder or file> <output folder or file>
 
 ## Layout & Views
 
-Let's cover the basic use case of a view with a layout. In `razor` each template becomes
+Let's cover the basic use case of a view with a layout. In **razor** each template becomes
 a Go function. A layout is a function a which receives the rendered result of a view.
 That is, given a layout function named `Layout` and a view function `View`, the view
 is rendered as `Layout(View())`.
@@ -48,8 +48,8 @@ Let's step through it. First define a layout, `views/layout/base.go.html`
 </html>
 ```
 
-The first block of the template instructs `razor` how to generate the function.
-Here is the generated function
+The first block of the template instructs **razor** how to generate the function.
+The generation function looks like this
 
 ```go
 // from dir
@@ -67,18 +67,15 @@ func Base(title string, body * razor.SafeBuffer, sections razor.Sections) *razor
 
 Notice the arguments are used in the template as variables denoted by `@`.
 
-Let's now define a view `views/index.go.html` to use the layout.
+Let's now define a view `views/index.go.html` function to use the layout.
 
 ```html
 @{
-    import (
+    +import (
         "views/layout"
     )
-
     +func (name string)
-
     title := "Welcome Page"
-
     +return layout.Base(title, VIEW, SECTIONS)
 }
 
@@ -97,9 +94,10 @@ The return value matches the signature as expected by layout.
 
 There are two reserved keywords for use in the return statement
 
-1.  `VIEW` the rendered content of the view
-2.  `SECTION` map of the sections in the view
+- `VIEW`:  the rendered buffer of the view
+- `SECTIONS`: a map of rendered sections by name
 
+## Using Generated Package
 
 To call from Go code
 
@@ -137,3 +135,11 @@ See [working example](example).
 | View |  [index.go.html](example/views/index.go.html) | [index.go](example/views/index.go) |
 | Layout | [default.go.html](example/views/layout/default.go.html) | [default.go](example/views/layout/default.go) |
 
+
+To build
+
+    gosu views
+
+To watch
+
+    gosu views --watch
