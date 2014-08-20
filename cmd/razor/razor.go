@@ -8,6 +8,14 @@ import (
 	"github.com/mgutz/razor/razor"
 )
 
+var configFile string
+var debug bool
+
+func init() {
+	flag.StringVar(&configFile, "config", "razor.yml", "YAML config filename")
+	flag.BoolVar(&debug, "debug", false, "print debug info")
+}
+
 func Usage() {
 	fmt.Fprintf(os.Stderr, "usage: gorazor <input dir or file> <output dir or file> [-debug]\n")
 	flag.PrintDefaults()
@@ -17,9 +25,10 @@ func Usage() {
 func main() {
 	flag.Usage = Usage
 	flag.Parse()
+	razor.Init(configFile, debug)
 	options := razor.Option{}
 
-	if flag.NArg() == 3 && flag.Arg(2) == "-debug" {
+	if debug {
 		options["Debug"] = true
 	}
 	if flag.NArg() >= 2 {

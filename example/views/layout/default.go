@@ -10,10 +10,15 @@ import (
 // Default is generated
 func Default(body *razor.SafeBuffer, sections razor.Sections, data razor.ViewData) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals().(*shared.Locals)
+	locals := shared.Locals
+	// avoids locals declared and not used
+	if locals != nil {
+	}
 	_buffer.WriteString("\n\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\" />\n    <title>")
 	_buffer.WriteSafe(data["title"])
-	_buffer.WriteString("</title>\n    <link rel=\"stylesheet\" href=\"/")
+	_buffer.WriteString("</title>\n    <!-- ")
+	_buffer.WriteSafe(locals)
+	_buffer.WriteString(" comes from razor.yml -->\n    <link rel=\"stylesheet\" href=\"/")
 	_buffer.WriteSafe(locals.Version)
 	_buffer.WriteString("/css/style.css\">\n    ")
 	_buffer.WriteSafe(sections["headFoot"])

@@ -51,7 +51,7 @@ type Compiler struct {
 	dir      string
 	file     string
 	result   string
-	sections []string
+	fqname   string
 }
 
 func (self *Compiler) addPart(part Part) {
@@ -97,14 +97,16 @@ func (self *Compiler) genPart() {
 func makeCompiler(ast *Ast, options Option, input string) *Compiler {
 	dir := filepath.Base(filepath.Dir(input))
 	file := Capitalize(strings.Replace(filepath.Base(input), gz_extension, "", 1))
-	return &Compiler{ast: ast, buf: "",
+	cp := &Compiler{ast: ast, buf: "",
 		layout: "", firstBLK: 0,
 		params: "()", parts: []Part{},
 		imports: map[string]bool{},
 		options: options,
 		dir:     dir,
 		file:    file,
+		fqname:  dir + "." + file,
 	}
+	return cp
 }
 
 func (cp *Compiler) visitBLK(child interface{}, ast *Ast) {
@@ -121,6 +123,7 @@ func (cp *Compiler) visitMKP(child interface{}, ast *Ast) {
 func (cp *Compiler) visitFirstBLK(blk *Ast) {
 	pre := cp.buf
 	cp.buf = ""
+
 	first := ""
 	backup := cp.parts
 	cp.parts = []Part{}
@@ -128,6 +131,8 @@ func (cp *Compiler) visitFirstBLK(blk *Ast) {
 	cp.genPart()
 	first, cp.buf = cp.buf, pre
 	cp.parts = backup
+
+	first = _config.GetMatchingPreamble(cp.fqname) + first
 
 	isImport := false
 	lines := strings.SplitN(first, "\n", -1)
@@ -143,14 +148,7 @@ func (cp *Compiler) visitFirstBLK(blk *Ast) {
 		}
 
 		if isImport {
-			parts := strings.SplitN(l, "/", -1)
-			if len(parts) >= 2 && parts[len(parts)-2] == "layout" {
-				cp.layout = strings.Replace(l, "\"", "", -1)
-				dir := strings.Join(parts[0:len(parts)-1], "/") + "\""
-				cp.imports[dir] = true
-			} else {
-				cp.imports[l] = true
-			}
+			cp.imports[l] = true
 		} else if strings.HasPrefix(l, "+func") {
 			vname := l[5:]
 			cp.params = vname

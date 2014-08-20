@@ -9,7 +9,7 @@ func Tasks(p *Project) {
 	p.Task("default", Pre{"views"})
 
 	p.Task("views", Watch{"example/views/**/*.go.html"}, Pre{"build"}, func() {
-		util.Exec("razor example/views example/views")
+		util.Exec("razor views views", M{"Dir": "example"})
 	})
 
 	p.Task("build", func() {

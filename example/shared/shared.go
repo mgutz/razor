@@ -1,5 +1,7 @@
 package shared
 
-type Locals struct {
+type Config struct {
 	Version string
 }
+
+var Locals = &Config{}

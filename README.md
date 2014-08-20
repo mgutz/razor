@@ -56,7 +56,20 @@ Let's step through it. First define a layout, `views/layout/base.go.html`
 The first block of the template instructs `razor` how to generate the function. In
 this example, the header declares a function with a signature of
 
-    (title string, body * razor.SafeBuffer, sections razor.Sections)
+    package "views/layout"
+
+    import (
+        "shared"
+    )
+
+    func Base(title string, body * razor.SafeBuffer, sections razor.Sections) *razor.SafeBuffer {
+        locals := razor.Locals().(*shared.Locals)
+        _buffer := razor.NewSafeBuffer()
+
+        // ... markup written to _buffer
+
+        return _buffer
+    }
 
 Notice the arguments are used in the template as variables denoted by `@`.
 

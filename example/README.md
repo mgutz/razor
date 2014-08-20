@@ -1,9 +1,13 @@
 # gorazor Example
 
-Reuilding the views with gosu manually
 
-    go run gosu.go views
+## Building
 
-Reuilding the views with gosu automatically
 
-    go run gosu.go --watch views
+Reuilding the views with gosu manually from *parent* directory
+
+    gosu views
+
+Reuilding the views with gosu automatically from *parent* directory
+
+    gosu views --watch

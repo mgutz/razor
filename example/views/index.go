@@ -4,6 +4,7 @@ package views
 
 import (
 	"github.com/mgutz/razor/example/models"
+	"github.com/mgutz/razor/example/shared"
 	"github.com/mgutz/razor/example/views/layout"
 	"github.com/mgutz/razor/html"
 	"github.com/mgutz/razor/razor"
@@ -12,6 +13,10 @@ import (
 // Index is generated
 func Index(user *models.User) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
+	locals := shared.Locals
+	// avoids locals declared and not used
+	if locals != nil {
+	}
 	data := razor.ViewData{
 		"title": "Razor + Go = love",
 	}
