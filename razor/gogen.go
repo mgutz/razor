@@ -51,6 +51,7 @@ type Compiler struct {
 	dir      string
 	file     string
 	result   string
+	sections []string
 }
 
 func (self *Compiler) addPart(part Part) {
@@ -70,10 +71,13 @@ func (self *Compiler) genPart() {
 	res := ""
 	for _, p := range self.parts {
 		if p.ptype == CMKP && p.value != "" {
+			// do some escapings
+			p.value = strings.Replace(p.value, `\n`, `\\n`, -1)
+			p.value = strings.Replace(p.value, "\n", `\n`, -1)
+			p.value = strings.Replace(p.value, `"`, `\"`, -1)
 			for strings.HasSuffix(p.value, "\\n") {
 				p.value = p.value[:len(p.value)-2]
 			}
-			p.value = strings.Replace(p.value, "\n", "\\n", -1)
 			if p.value != "\\n" && p.value != "" {
 				res += "_buffer.WriteString(\"" + p.value + "\")\n"
 			}
@@ -104,13 +108,12 @@ func makeCompiler(ast *Ast, options Option, input string) *Compiler {
 }
 
 func (cp *Compiler) visitBLK(child interface{}, ast *Ast) {
-	cp.addPart(Part{CBLK, getValStr(child)})
+	blk := getValStr(child)
+	cp.addPart(Part{CBLK, blk})
 }
 
 func (cp *Compiler) visitMKP(child interface{}, ast *Ast) {
-	v := strings.Replace(getValStr(child), "\n", "\\n", -1)
-	v = strings.Replace(v, "\"", "\\\"", -1)
-	cp.addPart(Part{CMKP, v})
+	cp.addPart(Part{CMKP, getValStr(child)})
 }
 
 // First block contains imports and parameters, specific action for layout,
@@ -153,7 +156,8 @@ func (cp *Compiler) visitFirstBLK(blk *Ast) {
 			cp.params = vname
 		} else if strings.HasPrefix(l, "+return ") {
 			vname := l[8:]
-			cp.result = strings.Replace(vname, "VIEW", "_buffer", -1)
+			vname = strings.Replace(vname, "VIEW", "_buffer", -1)
+			cp.result = strings.Replace(vname, "SECTIONS", "_sections", -1)
 		} else if l != "" {
 			cp.addPart(Part{CSTAT, l + "\n"})
 		}
@@ -243,7 +247,7 @@ func (cp *Compiler) processLayout() {
 		if strings.HasPrefix(l, "section") && strings.HasSuffix(l, "{") {
 			name := l
 			name = strings.TrimSpace(name[7 : len(name)-1])
-			out += "\n" + name + " := func() razor.SafeBuffer {\n"
+			out += "\n" + name + " := func() *razor.SafeBuffer {\n"
 			out += "_buffer := razor.NewSafeBuffer()\n"
 			scope = 1
 			sections = append(sections, name)
@@ -264,11 +268,19 @@ func (cp *Compiler) processLayout() {
 		}
 	}
 	cp.buf = out
+
+	if len(sections) > 0 {
+		cp.buf += "_sections := make(razor.Sections)\n"
+		for _, section := range sections {
+			cp.buf += fmt.Sprintf("_sections[\"%s\"] = %s()\n", section, section)
+		}
+	}
+
 	if cp.result != "" {
 		cp.buf += "_buffer = " + cp.result
 	}
-	foot := "\n return _buffer\n}\n"
-	cp.buf += foot
+	cp.buf += "\n return _buffer\n}\n"
+
 }
 
 func (cp *Compiler) visit() {
@@ -287,7 +299,7 @@ func (cp *Compiler) visit() {
 
 	// adds comment to generated to appease golint
 	head += "\n)\n// " + fun + " is generated\nfunc " + fun + cp.params
-	head += " razor.SafeBuffer {\n _buffer := razor.NewSafeBuffer()\n"
+	head += " *razor.SafeBuffer {\n _buffer := razor.NewSafeBuffer()\n"
 	cp.buf = head + cp.buf
 	cp.processLayout()
 }

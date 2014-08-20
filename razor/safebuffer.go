@@ -12,25 +12,32 @@ type SafeBuffer struct {
 	*bytes.Buffer
 }
 
-func NewSafeBuffer() SafeBuffer {
-	return SafeBuffer{Buffer: bytes.NewBuffer(nil)}
+type Sections map[string]*SafeBuffer
+
+func NewSafeBuffer() *SafeBuffer {
+	return &SafeBuffer{Buffer: bytes.NewBuffer(nil)}
 }
 
-func NewSafeBufferString(s string) SafeBuffer {
-	return SafeBuffer{Buffer: bytes.NewBufferString(s)}
+func NewSafeBufferString(s string) *SafeBuffer {
+	return &SafeBuffer{Buffer: bytes.NewBufferString(s)}
 }
 
-func (self SafeBuffer) WriteTo(w io.Writer) {
+func (self *SafeBuffer) WriteTo(w io.Writer) {
 	self.Buffer.WriteTo(w)
 }
 
-func (self SafeBuffer) WriteSafe(t interface{}) {
+func (self *SafeBuffer) WriteSafe(t interface{}) {
 	switch v := t.(type) {
-	case SafeBuffer:
-		self.Write(v.Bytes())
+	case *SafeBuffer:
+		if v != nil {
+			self.Write(v.Bytes())
+		}
 	case bytes.Buffer:
 		template.HTMLEscape(self.Buffer, v.Bytes())
 	default:
-		self.WriteString(template.HTMLEscaper(v))
+		s := template.HTMLEscaper(v)
+		if len(s) > 0 && s != "&lt;no value&gt;" {
+			self.WriteString(s)
+		}
 	}
 }

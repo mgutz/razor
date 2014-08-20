@@ -10,7 +10,7 @@ import (
 )
 
 // Scope is generated
-func Scope() razor.SafeBuffer {
+func Scope() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var obj *models.Widget
 	{

@@ -10,7 +10,7 @@ import (
 )
 
 // Argsbug is generated
-func Argsbug(totalMessage int, u *User) razor.SafeBuffer {
+func Argsbug(totalMessage int, u *User) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 
 	messages := []string{}

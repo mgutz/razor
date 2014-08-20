@@ -7,7 +7,7 @@ import (
 )
 
 // Quote is generated
-func Quote() razor.SafeBuffer {
+func Quote() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	_buffer.WriteString("<html>'text'</html>")
 

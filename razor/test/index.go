@@ -9,7 +9,7 @@ import (
 )
 
 // Index is generated
-func Index() razor.SafeBuffer {
+func Index() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var users []*models.User
 	var total int
@@ -31,18 +31,22 @@ func Index() razor.SafeBuffer {
 	}
 	_buffer.WriteString("\n		</tbody>\n	</table>\n</div>")
 
-	js := func() razor.SafeBuffer {
+	js := func() *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()
 		return _buffer
 	}
 
-	title := func() razor.SafeBuffer {
+	title := func() *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()
 
 		_buffer.WriteString("用户管理")
 
 		return _buffer
 	}
+
+	_sections := make(razor.Sections)
+	_sections["js"] = js()
+	_sections["title"] = title()
 
 	return _buffer
 }

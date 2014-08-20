@@ -8,7 +8,7 @@ import (
 )
 
 // Inline_var is generated
-func Inline_var() razor.SafeBuffer {
+func Inline_var() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	_buffer.WriteString("\n\n<body>")
 	_buffer.WriteSafe(Hello("Felix Sun", "h1", 30, &models.Author{"Van", 20}, 10))

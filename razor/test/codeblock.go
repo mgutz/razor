@@ -7,7 +7,7 @@ import (
 )
 
 // Codeblock is generated
-func Codeblock() razor.SafeBuffer {
+func Codeblock() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 
 	return _buffer

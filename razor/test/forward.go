@@ -8,7 +8,7 @@ import (
 )
 
 // Forward is generated
-func Forward() razor.SafeBuffer {
+func Forward() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var content string
 	var err string

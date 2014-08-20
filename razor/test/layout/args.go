@@ -9,7 +9,7 @@ import (
 )
 
 // Args is generated
-func Args(...*models.Widget) razor.SafeBuffer {
+func Args(...*models.Widget) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 
 	size := strconv.Itoa(12 / len(objs))

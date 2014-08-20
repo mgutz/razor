@@ -5,9 +5,10 @@
     "github.com/mgutz/razor/html"
   )
   +func (user *models.User)
-  +return layout.Default(VIEW, js(), title)
-
-  title := "Razor + Go love"
+  data := razor.ViewData{
+    "title": "Razor + Go = love",
+  }
+  +return layout.Default(VIEW, SECTIONS, data)
 }
 
 <!-- helper.go is in same package -->

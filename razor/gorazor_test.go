@@ -17,20 +17,6 @@ func TestCap(t *testing.T) {
 	}
 }
 
-func TestLayManager(t *testing.T) {
-	SetLayout("hello", []string{"this", "is", "good"})
-	SetLayout("world", []string{"funny"})
-	if len(LayOutArgs("hello")) != 3 {
-		t.Error()
-	}
-	if len(LayOutArgs("world")) != 1 {
-		t.Error()
-	}
-	if len(LayOutArgs("NO")) != 0 {
-		t.Error()
-	}
-}
-
 func TestLexer(t *testing.T) {
 	text := "case do func var switch"
 	lex := &Lexer{text, Tests}

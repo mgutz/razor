@@ -7,7 +7,7 @@ import (
 )
 
 // Var is generated
-func Var() razor.SafeBuffer {
+func Var() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var totalMessage int
 

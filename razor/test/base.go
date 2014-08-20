@@ -8,7 +8,7 @@ import (
 )
 
 // Base is generated
-func Base() razor.SafeBuffer {
+func Base() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var body string
 	var title string

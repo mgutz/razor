@@ -9,7 +9,7 @@ safe and escapes all values by default.
 Install
 
 ```sh
-go get github.com/mgutz/razor
+go get -u github.com/mgutz/razor/cmd/razor
 ```
 
 Running
@@ -22,7 +22,7 @@ razor template_file output_file
 ## Layout & Views
 
 Let's cover the basic use case of a view with a layout. In `razor` each template becomes
-a Go function.  A layout is a function a which receives the rendered result of a view.
+a Go function. A layout is a function a which receives the rendered result of a view.
 That is, given a layout function named `Layout` and a view function `View`, the view
 is rendered as `Layout(View())`.
 
@@ -30,30 +30,40 @@ Let's step through it. First define a layout, `views/layout/base.go.html`
 
 ```html
 @{
-    +func(title string, css razor.SafeBuffer, body razor.SafeBuffer, js razor.SafeBuffer)
+    +import (
+        "shared"
+    )
+    +func(title string, body *razor.SafeBuffer, sections razor.Sections)
+
+    locals := razor.Locals().(*shared.Locals)
 }
 
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8" />
-	<title>@title</title>
-        @css
+    <meta charset="utf-8" />
+    <title>@title</title>
+    <link rel="stylesheet" href="/@locals.Version/css/style.css">
+    @sections["css"]
 </head>
 <body>
-        <div class="container">@body</div>
-        @js
+    <div class="container">@body</div>
+    @sections["js"]
 </body>
 </html>
 ```
 
-The first block of template instructs `razor` how to generate the function. In
+The first block of the template instructs `razor` how to generate the function. In
 this example, the header declares a function with a signature of
 
-    (title string, css razor.SafeBuffer, body razor.SafeBuffer, js razor.SafeBuffer)
+    (title string, body * razor.SafeBuffer, sections razor.Sections)
 
 Notice the arguments are used in the template as variables denoted by `@`.
-The layout expects these values from the view.
+
+`Locals` is context you define that is initialized when your application
+starts. `Locals` contains data that is used across all templates. Version
+is a good candiate for `Locals`. Keep in mind `Locals` should be its
+own package to avoid circular dependencies.
 
 Let's now define a view `views/index.go.html` to use the layout.
 
@@ -65,10 +75,10 @@ Let's now define a view `views/index.go.html` to use the layout.
 
     // `+` indicates a directive and is intentionally not valid Go syntax
     +func (name string)
-    +return layout.Base(title, "", VIEW, js())
 
-    // inline code inserted in the function
     title := "Welcome Page"
+
+    +return layout.Base(title, VIEW, SECTIONS)
 }
 
 <h2>Welcome to homepage</h2>
@@ -80,21 +90,33 @@ Let's now define a view `views/index.go.html` to use the layout.
 }
 ```
 
-This view has a signature of `(name string)` which means a `name` value must be passed in
-as an argument.  A variable `title` is set in a code block and is used by the layout.
-A `section` named `js` becomes its own function. The magic all happens in the
-function's return value of `layout.Base(title, "", VIEW, js())`. `VIEW` is a placeholder
-for the rendered value of the view template.
+This view has a function signature of `(name string)` which means a `name` value must be passed in
+as an argument. A variable `title` is defined and becomes an argument for the layout.
+The return value matches the signature as expected by layout.
+
+There are two reserved keywords for use in the return statement
+
+1.  `VIEW` the rendered content of the view
+2.  `SECTION` map of the sections in the view
+
 
 To call from Go code
 
 ```go
 import (
     "views"
+    "shared"
+    "github.com/mgutz/razor/razor"
 )
 
 func viewHandler(w http.ResponseWriter, r *http.Request) {
     views.Index("gopherito").WriteTo(w)
+}
+
+func main() {
+    // accessed as `razor.Locals()` in templates
+    razor.SetLocals(&shared.Locals{Version:"1.0.0"})
+    // ... setup router (see example)
 }
 ```
 
@@ -131,10 +153,10 @@ insert unescaped data use `github.com/mgutz/gorazor/html#Raw`
 ### Helper Functions
 
 To create function whose result should not be escaped, return
-`razor.SafeBuffer`. Here's how `Raw` is implemented.
+`*razor.SafeBuffer`. Here's how `Raw` might be implemented.
 
 ```go
-func Raw(t interface{}) razor.SafeBuffer {
+func Raw(t interface{}) *razor.SafeBuffer {
     buffer := razor.NewSafeBuffer()
     buffer.WriteString(fmt.Sprint(t))
     return buffer
@@ -198,9 +220,9 @@ The **first code block** is strictly for declaration:
 }
 ```
 
-*   **import** - Optional. Import packages used by view.
+*   **+import** - Optional. Import additional packages used by  theview.
 
-        import (
+        +import (
             "sipin/views"
             "sipin/models"
         )
@@ -216,8 +238,6 @@ The **first code block** is strictly for declaration:
 
 **first code block** must be at the beginning of the template, i.e. before any html.
 
-`import` must be wrapped in `()`
-
 
 ### Helper / Include other template
 
@@ -225,8 +245,8 @@ The **first code block** is strictly for declaration:
 Go functions which return values that can be converted to `string`.
 
 If your helper needs to write unescaped values to the output buffer, use
-`razor.SafeBuffer` which is a `bytes.Buffer`. `@razor.Raw` may also be used but
-is not recommended. Keep your template clean by returning `SafeBuffer`.
+`*razor.SafeBuffer` which is a `bytes.Buffer`. `html.Raw` may also be used but
+is not recommended. Keep your template clean by returning `*razor.SafeBuffer`.
 
 ## Conventions
 

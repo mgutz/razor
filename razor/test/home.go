@@ -10,7 +10,7 @@ import (
 )
 
 // Home is generated
-func Home() razor.SafeBuffer {
+func Home() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var totalMessage int
 	var u *User
@@ -92,7 +92,7 @@ func Home() razor.SafeBuffer {
 	}
 	_buffer.WriteSafe(helper.Footer())
 
-	title := func() razor.SafeBuffer {
+	title := func() *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()
 
 		_buffer.WriteString("<title>")
@@ -102,11 +102,15 @@ func Home() razor.SafeBuffer {
 		return _buffer
 	}
 
-	side := func() razor.SafeBuffer {
+	side := func() *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()
 
 		return _buffer
 	}
+
+	_sections := make(razor.Sections)
+	_sections["title"] = title()
+	_sections["side"] = side()
 
 	return _buffer
 }

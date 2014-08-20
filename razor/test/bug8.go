@@ -7,7 +7,7 @@ import (
 )
 
 // Bug8 is generated
-func Bug8() razor.SafeBuffer {
+func Bug8() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var l *Locale
 	_buffer.WriteString("\n<span>")

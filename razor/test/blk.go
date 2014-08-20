@@ -7,7 +7,7 @@ import (
 )
 
 // Blk is generated
-func Blk() razor.SafeBuffer {
+func Blk() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 
 	return _buffer

@@ -7,7 +7,7 @@ import (
 )
 
 // Header is generated
-func Header() razor.SafeBuffer {
+func Header() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	_buffer.WriteString("<div>Page Header</div>")
 

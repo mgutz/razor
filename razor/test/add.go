@@ -8,7 +8,7 @@ import (
 )
 
 // Add is generated
-func Add(content string, err string) razor.SafeBuffer {
+func Add(content string, err string) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	_buffer.WriteString("\n\n<link rel=\"stylesheet\" href=\"/css/bootstrap-datetimepicker.css\">\n\n<style>\n.row {\n	margin-top: 10px;\n}\n</style>\n\n<h2>日程登记</h2>\n\n<div class=\"container-fluid\">\n	<form method=\"POST\" action=\"\">\n	<div class=\"row\" >\n		<p class=\"bg-danger\">")
 	_buffer.WriteSafe(err)
@@ -16,7 +16,7 @@ func Add(content string, err string) razor.SafeBuffer {
 	_buffer.WriteSafe(content)
 	_buffer.WriteString("\"/>\n	</div>\n\n	<div class=\"row\">\n	开始时间:\n	<input type='text' class=\"datetimepicker form-control\" name=\"startTime\"/>\n	</div>\n\n	<div class=\"row\">\n	结束时间:\n	<input type='text' class=\"datetimepicker form-control\" name=\"endTime\"/>\n	</div>\n\n	<div class=\"row\">\n	日程指派:\n	<select name=\"appoint\">\n		<option>cheney</option>\n		<option>wuvist</option>\n	</select>\n	</div>\n\n	<div class=\"row\">\n	<input style=\"float:right\" type=\"submit\" value=\"保存\" class=\"btn btn-primary\"/>\n	</div>\n	</form>\n</div>")
 
-	title := func() razor.SafeBuffer {
+	title := func() *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()
 
 		_buffer.WriteString("管理后台 - 添加日程")
@@ -24,7 +24,7 @@ func Add(content string, err string) razor.SafeBuffer {
 		return _buffer
 	}
 
-	js := func() razor.SafeBuffer {
+	js := func() *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()
 
 		_buffer.WriteString("<script src=\"/js/moment.js\"></script>")
@@ -35,6 +35,10 @@ func Add(content string, err string) razor.SafeBuffer {
 
 		return _buffer
 	}
+
+	_sections := make(razor.Sections)
+	_sections["title"] = title()
+	_sections["js"] = js()
 
 	return _buffer
 }

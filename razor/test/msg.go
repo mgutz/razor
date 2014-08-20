@@ -8,7 +8,7 @@ import (
 )
 
 // Msg is generated
-func Msg() razor.SafeBuffer {
+func Msg() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var u *User
 

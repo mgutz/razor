@@ -10,9 +10,11 @@ import (
 )
 
 // Index is generated
-func Index(user *models.User) razor.SafeBuffer {
+func Index(user *models.User) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	title := "Razor + Go love"
+	data := razor.ViewData{
+		"title": "Razor + Go = love",
+	}
 	_buffer.WriteString("\n\n<!-- helper.go is in same package -->")
 	_buffer.WriteSafe(Heading2("Razor rocks"))
 	_buffer.WriteString("\n\n<p>Escaped: ")
@@ -22,7 +24,7 @@ func Index(user *models.User) razor.SafeBuffer {
 	_buffer.WriteString("</p>\n\n<!-- avoid using Raw, create a function that returns SafeBuffer instead -->")
 	_buffer.WriteSafe(html.Raw("<h2>Heading 2</h2>"))
 
-	js := func() razor.SafeBuffer {
+	js := func() *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()
 
 		_buffer.WriteString("<script>\n    alert('Hello, ")
@@ -32,6 +34,8 @@ func Index(user *models.User) razor.SafeBuffer {
 		return _buffer
 	}
 
-	_buffer = layout.Default(_buffer, js(), title)
+	_sections := make(razor.Sections)
+	_sections["js"] = js()
+	_buffer = layout.Default(_buffer, _sections, data)
 	return _buffer
 }

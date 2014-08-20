@@ -10,11 +10,13 @@ import (
 // Raw insert unescaped HTML markup.
 //
 //      @html.Raw("<div>foo</div>")
-func Raw(markup interface{}) razor.SafeBuffer {
+func Raw(markup interface{}) *razor.SafeBuffer {
 	buffer := razor.NewSafeBuffer()
 	switch v := markup.(type) {
-	case razor.SafeBuffer:
-		buffer.Write(v.Bytes())
+	case *razor.SafeBuffer:
+		if v != nil {
+			buffer.Write(v.Bytes())
+		}
 	case bytes.Buffer:
 		buffer.Write(v.Bytes())
 	default:

@@ -7,7 +7,7 @@ import (
 )
 
 // Layout is generated
-func Layout() razor.SafeBuffer {
+func Layout() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	var body string
 	var title string

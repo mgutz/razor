@@ -7,7 +7,7 @@ import (
 )
 
 // Keyword is generated
-func Keyword() razor.SafeBuffer {
+func Keyword() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	_buffer.WriteString("BLK(<span>rememberingsteve@apple.com ")
 	_buffer.WriteSafe(username)

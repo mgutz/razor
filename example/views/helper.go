@@ -10,7 +10,7 @@ func UnsafeHello(name string) string {
 }
 
 // Will not be escaped since we are using SafeBuffer.
-func SafeHello(name string) razor.SafeBuffer {
+func SafeHello(name string) *razor.SafeBuffer {
 	buffer := razor.NewSafeBuffer()
 	buffer.WriteString("Hello <i>")
 	buffer.WriteSafe(name)
@@ -18,6 +18,6 @@ func SafeHello(name string) razor.SafeBuffer {
 	return buffer
 }
 
-func Heading2(name string) razor.SafeBuffer {
+func Heading2(name string) *razor.SafeBuffer {
 	return razor.NewSafeBufferString("<h2>" + name + "</h2>")
 }
