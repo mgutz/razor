@@ -12,7 +12,6 @@ var configFile string
 var debug bool
 
 func init() {
-	flag.StringVar(&configFile, "config", "razor.yml", "YAML config filename")
 	flag.BoolVar(&debug, "debug", false, "print debug info")
 }
 
@@ -25,7 +24,6 @@ func Usage() {
 func main() {
 	flag.Usage = Usage
 	flag.Parse()
-	razor.Init(configFile, debug)
 	options := razor.Option{}
 
 	if debug {

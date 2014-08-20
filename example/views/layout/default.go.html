@@ -1,5 +1,6 @@
 @{
   +func (body *razor.SafeBuffer, sections razor.Sections, data razor.ViewData)
+  locals := razor.Locals
 }
 
 <!DOCTYPE html>
@@ -8,7 +9,7 @@
     <meta charset="utf-8" />
     <title>@data["title"]</title>
     <!-- @locals comes from razor.yml -->
-    <link rel="stylesheet" href="/@locals.Version/css/style.css">
+    <link rel="stylesheet" href="/@locals["version"]/css/style.css">
     @sections["headFoot"]
 </head>
 <body>

@@ -132,8 +132,6 @@ func (cp *Compiler) visitFirstBLK(blk *Ast) {
 	first, cp.buf = cp.buf, pre
 	cp.parts = backup
 
-	first = _config.GetMatchingPreamble(cp.fqname) + first
-
 	isImport := false
 	lines := strings.SplitN(first, "\n", -1)
 	for _, l := range lines {

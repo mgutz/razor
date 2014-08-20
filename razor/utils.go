@@ -8,6 +8,7 @@ import (
 )
 
 type ViewData map[string]interface{}
+type M map[string]interface{}
 
 func StrTime(timestamp int64, format string) string {
 	return time.Unix(timestamp, 0).Format(format)
