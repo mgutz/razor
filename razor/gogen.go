@@ -295,7 +295,13 @@ func (cp *Compiler) visit() {
 
 	// adds comment to generated to appease golint
 	head += "\n)\n// " + fun + " is generated\nfunc " + fun + cp.params
-	head += " *razor.SafeBuffer {\n _buffer := razor.NewSafeBuffer()\n"
+	head += ` *razor.SafeBuffer {
+_buffer := razor.NewSafeBuffer()
+locals := razor.Locals
+if locals != nil {
+	// avoids not declared error if locals is not used
+}
+`
 	cp.buf = head + cp.buf
 	cp.processLayout()
 }

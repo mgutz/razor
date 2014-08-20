@@ -12,6 +12,10 @@ import (
 // Index is generated
 func Index(user *models.User) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
+	locals := razor.Locals
+	if locals != nil {
+		// avoids not declared error if locals is not used
+	}
 	data := razor.ViewData{
 		"title": "Razor + Go = love",
 	}

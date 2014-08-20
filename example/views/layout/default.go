@@ -10,6 +10,9 @@ import (
 func Default(body *razor.SafeBuffer, sections razor.Sections, data razor.ViewData) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	locals := razor.Locals
+	if locals != nil {
+		// avoids not declared error if locals is not used
+	}
 	_buffer.WriteString("\n\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\" />\n    <title>")
 	_buffer.WriteSafe(data["title"])
 	_buffer.WriteString("</title>\n    <!-- ")

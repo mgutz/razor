@@ -12,6 +12,10 @@ func Tasks(p *Project) {
 		util.Exec("razor views views", M{"Dir": "example"})
 	})
 
+	p.Task("example", func() {
+		util.Exec("go run main.go", M{"Dir": "example"})
+	})
+
 	p.Task("build", func() {
 		util.Exec("go install", M{"Dir": "cmd/razor"})
 	})
