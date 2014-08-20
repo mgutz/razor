@@ -3,13 +3,17 @@
 package cases
 
 import (
-	"cases/layout"
+	"cases/layout/base"
 	"github.com/mgutz/razor/razor"
 )
 
 // Forward is generated
 func Forward() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
+	locals := razor.Locals
+	if locals != nil {
+		// avoids not declared error if locals is not used
+	}
 	var content string
 	var err string
 

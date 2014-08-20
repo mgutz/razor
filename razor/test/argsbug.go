@@ -3,7 +3,7 @@
 package cases
 
 import (
-	"cases/layout"
+	"cases/layout/args"
 	"github.com/mgutz/razor/razor"
 	. "kp/models"
 	"tpl/helper"
@@ -12,6 +12,10 @@ import (
 // Argsbug is generated
 func Argsbug(totalMessage int, u *User) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
+	locals := razor.Locals
+	if locals != nil {
+		// avoids not declared error if locals is not used
+	}
 
 	messages := []string{}
 	_buffer.WriteString("\n\n<p>")

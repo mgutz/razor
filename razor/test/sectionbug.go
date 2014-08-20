@@ -5,12 +5,16 @@ package cases
 import (
 	"github.com/mgutz/razor/razor"
 	"kp/models"
-	"tpl/admin/layout"
+	"tpl/admin/layout/base"
 )
 
 // Sectionbug is generated
 func Sectionbug() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
+	locals := razor.Locals
+	if locals != nil {
+		// avoids not declared error if locals is not used
+	}
 
 	js := func() *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()

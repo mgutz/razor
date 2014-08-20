@@ -10,6 +10,10 @@ import (
 // Msg is generated
 func Msg() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
+	locals := razor.Locals
+	if locals != nil {
+		// avoids not declared error if locals is not used
+	}
 	var u *User
 
 	getName := func(u *User) string {

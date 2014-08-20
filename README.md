@@ -30,7 +30,6 @@ Let's step through it. First define a layout, `views/layout/base.go.html`
 ```html
 @{
     +func(title string, body *razor.SafeBuffer, sections razor.Sections)
-    locals := razor.Locals
 }
 
 <!DOCTYPE html>
@@ -58,6 +57,7 @@ package "layout"
 // from +func
 func Base(title string, body * razor.SafeBuffer, sections razor.Sections) *razor.SafeBuffer {
     _buffer := razor.NewSafeBuffer()
+    locals := razor.Locals
 
     // ... markup written to _buffer
 
@@ -66,6 +66,8 @@ func Base(title string, body * razor.SafeBuffer, sections razor.Sections) *razor
 ```
 
 Notice the arguments are used in the template as variables denoted by `@`.
+`@locals` is a special variable added by **razor** which is a map
+that can initialized by you.
 
 Let's now define a view `views/index.go.html` function to use the layout.
 

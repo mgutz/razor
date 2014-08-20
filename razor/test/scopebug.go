@@ -12,6 +12,10 @@ import (
 // Scopebug is generated
 func Scopebug() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
+	locals := razor.Locals
+	if locals != nil {
+		// avoids not declared error if locals is not used
+	}
 	var obj *models.Widget
 	{
 		if 1 == 2 {

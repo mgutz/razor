@@ -9,6 +9,10 @@ import (
 // Quote is generated
 func Quote() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
+	locals := razor.Locals
+	if locals != nil {
+		// avoids not declared error if locals is not used
+	}
 	_buffer.WriteString("<html>'text'</html>")
 
 	return _buffer
