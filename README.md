@@ -112,7 +112,6 @@ To call from Go code
 import (
     "views"
     "shared"
-    "github.com/mgutz/razor"
 )
 
 func viewHandler(w http.ResponseWriter, r *http.Request) {
@@ -121,7 +120,7 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	razor.SetLocals(razor.M{
+	razor.SetLocals(map[string]interface{}{
 		"version": "1.0.0",
 	})
 
@@ -139,8 +138,8 @@ See [working example](example).
 
 | Description | Template | Generated code |
 | ------------| -------- | ---------------|
-| View |  [index.go.html](example/views/index.go.html) | [index.go](example/views/index.go) |
-| Layout | [default.go.html](example/views/layout/default.go.html) | [default.go](example/views/layout/default.go) |
+| View |  [index.go.html](example/views/front/index.go.html) | [index.go](example/views/front/index.go) |
+| Layout | [default.go.html](example/views/front/layout.go.html) | [default.go](example/views/front/layout.go) |
 
 
 To build
@@ -155,4 +154,6 @@ To watch and rebuild on change
 
 ## Credit
 
-This package is based on the more awesome [sipin gorazor](https://github.com/sipin/gorazor).
+This package is a fork of [sipin gorazor](https://github.com/sipin/gorazor).
+
+// views.Render("admin/foo", razor.M{"title": "Welcome"}).WriteTo(w)

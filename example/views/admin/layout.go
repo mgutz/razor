@@ -6,8 +6,8 @@ import (
 	"github.com/mgutz/razor"
 )
 
-// Default is generated
-func Default(sections razor.Sections, data razor.ViewData) *razor.SafeBuffer {
+// Layout is generated
+func Layout(sections razor.Sections, data razor.ViewData) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	locals := razor.Locals
 	if locals != nil {

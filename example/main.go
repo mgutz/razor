@@ -6,11 +6,17 @@ import (
 
 	"github.com/mgutz/razor"
 	"github.com/mgutz/razor/example/models"
+	"github.com/mgutz/razor/example/views/admin"
 	"github.com/mgutz/razor/example/views/front"
 )
 
-func viewHandler(w http.ResponseWriter, r *http.Request) {
-	user := &models.User{Name: "Foo"}
+func adminHandler(w http.ResponseWriter, r *http.Request) {
+	user := &models.User{Name: "Admin"}
+	admin.Index(user).WriteTo(w)
+}
+
+func frontHandler(w http.ResponseWriter, r *http.Request) {
+	user := &models.User{Name: "You"}
 	front.Index(user).WriteTo(w)
 }
 
@@ -19,7 +25,8 @@ func main() {
 		"version": "1.0.0",
 	})
 
-	http.HandleFunc("/", viewHandler)
+	http.HandleFunc("/", frontHandler)
+	http.HandleFunc("/admin", adminHandler)
 	//http.Handle("/{{version}}/", http.StripPrefix("/tmpfiles/", http.FileServer(http.Dir("/tmp"))))
 	http.Handle("/{{version}}/", http.FileServer(http.Dir("public")))
 	port := ":8080"

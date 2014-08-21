@@ -6,7 +6,6 @@ import (
 	"github.com/mgutz/razor"
 	"github.com/mgutz/razor/example/models"
 	"github.com/mgutz/razor/example/views"
-	"github.com/mgutz/razor/html"
 )
 
 // Index is generated
@@ -19,26 +18,17 @@ func Index(user *models.User) *razor.SafeBuffer {
 	data := razor.ViewData{
 		"title": "Razor + Go = love",
 	}
-	_buffer.WriteString("\n\n<!-- use of a section for body is more consistent and simplifies code -->")
 
 	body := func() *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()
+		views.Heading2("Admin area")
 
-		_buffer.WriteString("<!-- if this was in body, views would have to be escaped as ")
-		_buffer.WriteSafe(views)
-		_buffer.WriteString(" -->\n  views.Heading2(\"Razor rocks\")\n\n  <p>Escaped: ")
-		_buffer.WriteSafe(UnsafeHello(user.Name))
-		_buffer.WriteString("</p>")
+		_buffer.WriteString("Use sections for body to be consisten and it simplifies code")
 
-		_buffer.WriteString("<p>Unescaped: ")
-		_buffer.WriteSafe(SafeHello(user.Name))
-		_buffer.WriteString("</p>")
-
-		_buffer.WriteString("<!-- avoid using Raw, create a function that returns SafeBuffer instead -->\n  html.Raw(\"<h2>Heading 2</h2>")
 		return _buffer
 	}
 
-	js := func() *razor.SafeBuffer {
+	bodyFoot := func() *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()
 
 		_buffer.WriteString("<script>\n    alert('Hello, ")
@@ -50,7 +40,7 @@ func Index(user *models.User) *razor.SafeBuffer {
 
 	_sections := make(razor.Sections)
 	_sections["body"] = body()
-	_sections["js"] = js()
+	_sections["bodyFoot"] = bodyFoot()
 	_buffer = Layout(_sections, data)
 	return _buffer
 }

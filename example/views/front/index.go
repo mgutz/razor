@@ -28,7 +28,7 @@ func Index(user *models.User) *razor.SafeBuffer {
 	_buffer.WriteString("</p>\n\n<!-- avoid using Raw, create a function that returns SafeBuffer instead -->")
 	_buffer.WriteSafe(html.Raw("<h2>Heading 2</h2>"))
 
-	js := func() *razor.SafeBuffer {
+	bodyFoot := func() *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()
 
 		_buffer.WriteString("<script>\n    alert('Hello, ")
@@ -39,7 +39,7 @@ func Index(user *models.User) *razor.SafeBuffer {
 	}
 
 	_sections := make(razor.Sections)
-	_sections["js"] = js()
+	_sections["bodyFoot"] = bodyFoot()
 	_buffer = Layout(_buffer, _sections, data)
 	return _buffer
 }
