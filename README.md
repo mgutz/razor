@@ -48,14 +48,14 @@ Let's step through it. First define a layout, `views/layout/base.go.html`
 ```
 
 The first block of the template instructs **razor** how to generate the function.
-The generation function looks like this
+The generated function looks like this
 
 ```go
 // from dir
 package "layout"
 
 // from +func
-func Base(title string, body * razor.SafeBuffer, sections razor.Sections) *razor.SafeBuffer {
+func Base(title string, body *razor.SafeBuffer, sections razor.Sections) *razor.SafeBuffer {
     _buffer := razor.NewSafeBuffer()
     locals := razor.Locals
 
@@ -65,9 +65,13 @@ func Base(title string, body * razor.SafeBuffer, sections razor.Sections) *razor
 }
 ```
 
-Notice the arguments are used in the template as variables denoted by `@`.
-`@locals` is a special variable added by **razor** which is a map
-that can initialized by you.
+Key points
+
+1.  The package name is derived from the directory.
+2.  The generated function is derived from `+func` directive
+3.  **razor** adds a `locals` variable accessible as `@locals`.
+    Call `razor.SetLocals` once to initialize locals for all templates.
+4.  A section in `sections` and `body` are of type `*razor.SafeBuffer`
 
 Let's now define a view `views/index.go.html` function to use the layout.
 
@@ -77,27 +81,29 @@ Let's now define a view `views/index.go.html` function to use the layout.
         "views/layout"
     )
     +func (name string)
-    title := "Welcome Page"
+    title := "Welcome"
     +return layout.Base(title, VIEW, SECTIONS)
 }
 
 <h2>Welcome to homepage</h2>
 
 @section js {
-<script>
-    alert('hello! @name')
-</script>
+    <script>
+        alert('hello! @name')
+    </script>
 }
 ```
 
-This view has a function signature of `(name string)` which means a `name` value must be passed in
-as an argument. A variable `title` is defined and becomes an argument for the layout.
-The return value matches the signature as expected by layout.
+Key points
 
-There are two reserved keywords for use in the return statement
+The `+return` directive instructs razor to call `layout.Base` with arguments `title`, `VIEW`
+and `SECTIONS` which corresponds to the parameters defined in the layout.
 
-- `VIEW`:  the rendered buffer of the view
-- `SECTIONS`: a map of rendered sections by name
+There are two reserved keywords which may be used in the return statement
+
+- `VIEW`:  the rendered buffer of the view, ie everything outside of sections aka body
+- `SECTIONS`: a map of rendered buffer sections by name
+
 
 ## Using Generated Package
 

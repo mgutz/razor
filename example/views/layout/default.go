@@ -7,7 +7,7 @@ import (
 )
 
 // Default is generated
-func Default(body *razor.SafeBuffer, sections razor.Sections, data razor.ViewData) *razor.SafeBuffer {
+func Default(sections razor.Sections, data razor.ViewData) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 	locals := razor.Locals
 	if locals != nil {
@@ -21,9 +21,9 @@ func Default(body *razor.SafeBuffer, sections razor.Sections, data razor.ViewDat
 	_buffer.WriteSafe(locals["version"])
 	_buffer.WriteString("/css/style.css\">\n    ")
 	_buffer.WriteSafe(sections["headFoot"])
-	_buffer.WriteString("\n</head>\n<body>\n    <div class=\"container\">")
-	_buffer.WriteSafe(body)
-	_buffer.WriteString("</div>\n    ")
+	_buffer.WriteString("\n</head>\n<body>\n    <div class=\"container\">\n      ")
+	_buffer.WriteSafe(sections["body"])
+	_buffer.WriteString("\n    </div>\n    ")
 	_buffer.WriteSafe(data["footer"])
 	_buffer.WriteString("\n    ")
 	_buffer.WriteSafe(sections["bodyFoot"])

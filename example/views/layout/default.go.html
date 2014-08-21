@@ -1,5 +1,5 @@
 @{
-  +func (body *razor.SafeBuffer, sections razor.Sections, data razor.ViewData)
+  +func (sections razor.Sections, data razor.ViewData)
 }
 
 <!DOCTYPE html>
@@ -12,7 +12,9 @@
     @sections["headFoot"]
 </head>
 <body>
-    <div class="container">@body</div>
+    <div class="container">
+      @sections["body"]
+    </div>
     @data["footer"]
     @sections["bodyFoot"]
   </body>

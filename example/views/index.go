@@ -19,14 +19,24 @@ func Index(user *models.User) *razor.SafeBuffer {
 	data := razor.ViewData{
 		"title": "Razor + Go = love",
 	}
-	_buffer.WriteString("\n\n<!-- helper.go is in same package -->")
-	_buffer.WriteSafe(Heading2("Razor rocks"))
-	_buffer.WriteString("\n\n<p>Escaped: ")
-	_buffer.WriteSafe(UnsafeHello(user.Name))
-	_buffer.WriteString("</p>\n<p>Unescaped: ")
-	_buffer.WriteSafe(SafeHello(user.Name))
-	_buffer.WriteString("</p>\n\n<!-- avoid using Raw, create a function that returns SafeBuffer instead -->")
-	_buffer.WriteSafe(html.Raw("<h2>Heading 2</h2>"))
+
+	body := func() *razor.SafeBuffer {
+		_buffer := razor.NewSafeBuffer()
+
+		_buffer.WriteString("<!-- helper.go is in same package -->\n  ")
+		_buffer.WriteSafe(Heading2("Razor rocks"))
+		_buffer.WriteString("\n\n  <p>Escaped: ")
+		_buffer.WriteSafe(UnsafeHello(user.Name))
+		_buffer.WriteString("</p>")
+
+		_buffer.WriteString("<p>Unescaped: ")
+		_buffer.WriteSafe(SafeHello(user.Name))
+		_buffer.WriteString("</p>")
+
+		_buffer.WriteString("<!-- avoid using Raw, create a function that returns SafeBuffer instead -->\n  ")
+		_buffer.WriteSafe(html.Raw("<h2>Heading 2</h2>"))
+		return _buffer
+	}
 
 	js := func() *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()
@@ -39,7 +49,8 @@ func Index(user *models.User) *razor.SafeBuffer {
 	}
 
 	_sections := make(razor.Sections)
+	_sections["body"] = body()
 	_sections["js"] = js()
-	_buffer = layout.Default(_buffer, _sections, data)
+	_buffer = layout.Default(_sections, data)
 	return _buffer
 }
