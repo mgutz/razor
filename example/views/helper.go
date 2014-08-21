@@ -1,7 +1,7 @@
 package views
 
 import (
-	"github.com/mgutz/razor/razor"
+	"github.com/mgutz/razor"
 )
 
 // This will be escaped by the template

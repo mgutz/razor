@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/mgutz/razor/razor"
+	"github.com/mgutz/razor"
 )
 
 // Raw insert unescaped HTML markup.

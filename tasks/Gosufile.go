@@ -19,10 +19,6 @@ func Tasks(p *Project) {
 	p.Task("build", func() {
 		util.Exec("go install", M{"Dir": "cmd/razor"})
 	})
-
-	p.Task("test", func() {
-		util.Exec("go test", M{"Dir": "razor"})
-	})
 }
 
 func main() {

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/mgutz/razor/razor"
+	"github.com/mgutz/razor"
 )
 
 var configFile string

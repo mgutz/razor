@@ -1,0 +1,30 @@
+@{
+  +import (
+    "github.com/mgutz/razor/example/models"
+    "github.com/mgutz/razor/example/views"
+    "github.com/mgutz/razor/html"
+  )
+  +func (user *models.User)
+  data := razor.ViewData{
+    "title": "Razor + Go = love",
+  }
+  +return Layout(SECTIONS, data)
+}
+
+<!-- use of a section for body is more consistent and simplifies code -->
+@section body {
+  <!-- if this was in body, views would have to be escaped as @views -->
+  views.Heading2("Razor rocks")
+
+  <p>Escaped: @UnsafeHello(user.Name)</p>
+  <p>Unescaped: @SafeHello(user.Name)</p>
+
+  <!-- avoid using Raw, create a function that returns SafeBuffer instead -->
+  html.Raw("<h2>Heading 2</h2>")
+}
+
+@section js {
+  <script>
+    alert('Hello, @user.Name');
+  </script>
+}

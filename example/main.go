@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/mgutz/razor"
 	"github.com/mgutz/razor/example/models"
-	"github.com/mgutz/razor/example/views"
-	"github.com/mgutz/razor/razor"
+	"github.com/mgutz/razor/example/views/front"
 )
 
 func viewHandler(w http.ResponseWriter, r *http.Request) {
 	user := &models.User{Name: "Foo"}
-	views.Index(user).WriteTo(w)
+	front.Index(user).WriteTo(w)
 }
 
 func main() {

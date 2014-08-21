@@ -1,8 +1,8 @@
 # razor
 
-**razor** is a Go port of ASP.NET's Razor view engine with less magic.
 **razor** is a code generator which compiles Razor templates into a Go package of template functions.
 **razor** is fast, reflection-less and escapes all values by default.
+**razor** is a Go port of ASP.NET's Razor view engine with less magic.
 
 ## Usage
 
@@ -51,10 +51,8 @@ The first block of the template instructs **razor** how to generate the function
 The generated function looks like this
 
 ```go
-// from dir
 package "layout"
 
-// from +func
 func Base(title string, body *razor.SafeBuffer, sections razor.Sections) *razor.SafeBuffer {
     _buffer := razor.NewSafeBuffer()
     locals := razor.Locals
@@ -68,10 +66,11 @@ func Base(title string, body *razor.SafeBuffer, sections razor.Sections) *razor.
 Key points
 
 1.  The package name is derived from the directory.
-2.  The generated function is derived from `+func` directive
-3.  **razor** adds a `locals` variable accessible as `@locals`.
+2.  The function name is the basename of the template.
+3.  The generated function signature is derived from `+func` directive
+    and always has a return value of `*razor.SafeBuffer`
+4.  **razor** adds a `locals` variable accessible as `@locals`.
     Call `razor.SetLocals` once to initialize locals for all templates.
-4.  A section in `sections` and `body` are of type `*razor.SafeBuffer`
 
 Let's now define a view `views/index.go.html` function to use the layout.
 
@@ -113,7 +112,7 @@ To call from Go code
 import (
     "views"
     "shared"
-    "github.com/mgutz/razor/razor"
+    "github.com/mgutz/razor"
 )
 
 func viewHandler(w http.ResponseWriter, r *http.Request) {
@@ -146,8 +145,14 @@ See [working example](example).
 
 To build
 
+    # get gosu task runner
+    go get -u github.com/mgutz/gosu/cmd/gosu
     gosu views
 
-To watch
+To watch and rebuild on change
 
     gosu views --watch
+
+## Credit
+
+This package is based on the more awesome [sipin gorazor](https://github.com/sipin/gorazor).

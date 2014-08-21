@@ -1,0 +1,21 @@
+@{
+  +func (body *razor.SafeBuffer, sections razor.Sections, data razor.ViewData)
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@data["title"]</title>
+    <!-- @locals comes from razor.yml -->
+    <link rel="stylesheet" href="/@locals["version"]/css/style.css">
+    @sections["headFoot"]
+</head>
+<body>
+    <div class="container">
+      @body
+    </div>
+    @data["footer"]
+    @sections["bodyFoot"]
+  </body>
+</html>
