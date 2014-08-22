@@ -11,7 +11,7 @@ import (
 // Index is generated
 func Index(user *models.User) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	data := razor.ViewData{
+	data := razor.M{
 		"title": "Razor + Go = love",
 	}
 

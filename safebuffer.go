@@ -3,29 +3,25 @@ package razor
 import (
 	"bytes"
 	"html/template"
-	"io"
+	//"io"
 )
 
-var Empty = NewSafeBuffer()
-
+// SafeBuffer is a bufffer which mitigates HTML escaping and raw values.
 type SafeBuffer struct {
 	*bytes.Buffer
 }
 
-type Sections map[string]*SafeBuffer
-
+// NewSafeBuffer creates a new SafeBuffer.
 func NewSafeBuffer() *SafeBuffer {
 	return &SafeBuffer{Buffer: bytes.NewBuffer(nil)}
 }
 
+// NewSafeBufferString creates a new SafeBuffer from string.
 func NewSafeBufferString(s string) *SafeBuffer {
 	return &SafeBuffer{Buffer: bytes.NewBufferString(s)}
 }
 
-func (self *SafeBuffer) WriteTo(w io.Writer) {
-	self.Buffer.WriteTo(w)
-}
-
+// WriteSafe writes the escaped value to the buffer.
 func (self *SafeBuffer) WriteSafe(t interface{}) {
 	switch v := t.(type) {
 	case *SafeBuffer:

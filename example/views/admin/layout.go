@@ -7,7 +7,7 @@ import (
 )
 
 // Layout is generated
-func Layout(data razor.ViewData, body *razor.SafeBuffer, sections razor.Sections) *razor.SafeBuffer {
+func Layout(data razor.M, body *razor.SafeBuffer, sections razor.Sections) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 
 	App := razor.App

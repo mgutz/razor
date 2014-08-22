@@ -4,7 +4,7 @@
     "github.com/mgutz/razor/example/views"
   )
   +params (user *models.User)
-  data := razor.ViewData{
+  data := razor.M{
     "title": "Razor + Go = love",
   }
   +extends Layout(data, ...)

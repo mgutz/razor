@@ -112,6 +112,7 @@ To call from Go code
 import (
     "views"
     "models"
+    "github.com/mgutz/razor"
 )
 
 func viewHandler(w http.ResponseWriter, r *http.Request) {
