@@ -12,10 +12,6 @@ import (
 // End is generated
 func End() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals
-	if locals != nil {
-		// avoids not declared error if locals is not used
-	}
 	var totalMessage int
 	var u *User
 	_buffer.WriteSafe(helper.Header())

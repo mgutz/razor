@@ -11,10 +11,6 @@ import (
 // Index is generated
 func Index(user *models.User) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals
-	if locals != nil {
-		// avoids not declared error if locals is not used
-	}
 	data := razor.ViewData{
 		"title": "Razor + Go = love",
 	}
@@ -41,6 +37,6 @@ func Index(user *models.User) *razor.SafeBuffer {
 	_sections := make(razor.Sections)
 	_sections["body"] = body()
 	_sections["bodyFoot"] = bodyFoot()
-	_buffer = Layout(_sections, data)
+	_buffer = Layout(data, _buffer, _sections)
 	return _buffer
 }

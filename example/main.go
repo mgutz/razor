@@ -21,7 +21,7 @@ func frontHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	razor.SetLocals(razor.M{
+	razor.SetAppState(razor.M{
 		"version": "1.0.0",
 	})
 

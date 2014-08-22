@@ -9,10 +9,6 @@ import (
 // Footer is generated
 func Footer() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals
-	if locals != nil {
-		// avoids not declared error if locals is not used
-	}
 	_buffer.WriteString("<div>copyright 2014</div>")
 
 	return _buffer

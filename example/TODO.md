@@ -16,4 +16,8 @@
   )
 }
 
+// weakly typed accepts ViewData only
 views.Render("admin/index", razor.ViewData{})
+
+// strongly typed
+views.AdminIndex()

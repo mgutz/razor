@@ -10,10 +10,6 @@ import (
 // Inline_var is generated
 func Inline_var() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals
-	if locals != nil {
-		// avoids not declared error if locals is not used
-	}
 	_buffer.WriteString("\n\n<body>")
 	_buffer.WriteSafe(Hello("Felix Sun", "h1", 30, &models.Author{"Van", 20}, 10))
 	_buffer.WriteString("\n</body>")

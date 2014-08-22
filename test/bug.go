@@ -9,10 +9,6 @@ import (
 // Bug is generated
 func Bug() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals
-	if locals != nil {
-		// avoids not declared error if locals is not used
-	}
 	_buffer.WriteString("<html>\n  <head>\n    <title>Title</title>\n  </head>\n\n  <body>\n  Body\n  </body>\n</html>")
 
 	return _buffer

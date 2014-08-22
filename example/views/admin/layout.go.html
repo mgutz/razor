@@ -1,5 +1,5 @@
 @{
-  +func (sections razor.Sections, data razor.ViewData)
+  +params (data razor.ViewData, ...)
 }
 
 <!DOCTYPE html>
@@ -7,15 +7,14 @@
 <head>
     <meta charset="utf-8" />
     <title>@data["title"]</title>
-    <!-- @locals comes from razor.yml -->
-    <link rel="stylesheet" href="/@locals["version"]/css/style.css">
-    @sections["headFoot"]
+    <link rel="stylesheet" href="/@App["version"]/css/style.css">
+    @RenderSection("headFoot")
 </head>
 <body>
     <div class="container">
-      @sections["body"]
+      @RenderSection("body")
     </div>
     @data["footer"]
-    @sections["bodyFoot"]
+    @RenderSection("bodyFoot")
   </body>
 </html>

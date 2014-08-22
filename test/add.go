@@ -10,10 +10,6 @@ import (
 // Add is generated
 func Add(content string, err string) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals
-	if locals != nil {
-		// avoids not declared error if locals is not used
-	}
 	_buffer.WriteString("\n\n<link rel=\"stylesheet\" href=\"/css/bootstrap-datetimepicker.css\">\n\n<style>\n.row {\n	margin-top: 10px;\n}\n</style>\n\n<h2>日程登记</h2>\n\n<div class=\"container-fluid\">\n	<form method=\"POST\" action=\"\">\n	<div class=\"row\" >\n		<p class=\"bg-danger\">")
 	_buffer.WriteSafe(err)
 	_buffer.WriteString("</p>\n	</div>\n\n	<div class=\"row\">\n	内容:\n	<input type='text' class=\"form-control\" name=\"content\" value=\"")

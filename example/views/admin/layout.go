@@ -7,26 +7,31 @@ import (
 )
 
 // Layout is generated
-func Layout(sections razor.Sections, data razor.ViewData) *razor.SafeBuffer {
+func Layout(data razor.ViewData, body *razor.SafeBuffer, sections razor.Sections) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals
-	if locals != nil {
-		// avoids not declared error if locals is not used
+
+	App := razor.App
+
+	RenderSection := func(section string, required ...bool) *razor.SafeBuffer {
+		text := sections[section]
+		isRequired := len(required) == 1 && required[0]
+		if text == nil && isRequired {
+			return razor.NewSafeBufferString("<div style='color:white; background-color: red'>SECTION " + section + " is required!<div>")
+		}
+		return text
 	}
 	_buffer.WriteString("\n\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\" />\n    <title>")
 	_buffer.WriteSafe(data["title"])
-	_buffer.WriteString("</title>\n    <!-- ")
-	_buffer.WriteSafe(locals)
-	_buffer.WriteString(" comes from razor.yml -->\n    <link rel=\"stylesheet\" href=\"/")
-	_buffer.WriteSafe(locals["version"])
+	_buffer.WriteString("</title>\n    <link rel=\"stylesheet\" href=\"/")
+	_buffer.WriteSafe(App["version"])
 	_buffer.WriteString("/css/style.css\">\n    ")
-	_buffer.WriteSafe(sections["headFoot"])
+	_buffer.WriteSafe(RenderSection("headFoot"))
 	_buffer.WriteString("\n</head>\n<body>\n    <div class=\"container\">\n      ")
-	_buffer.WriteSafe(sections["body"])
+	_buffer.WriteSafe(RenderSection("body"))
 	_buffer.WriteString("\n    </div>\n    ")
 	_buffer.WriteSafe(data["footer"])
 	_buffer.WriteString("\n    ")
-	_buffer.WriteSafe(sections["bodyFoot"])
+	_buffer.WriteSafe(RenderSection("bodyFoot"))
 	_buffer.WriteString("\n  </body>\n</html>")
 
 	return _buffer

@@ -1,14 +1,14 @@
 @{
-  +import (
+  import (
     "github.com/mgutz/razor/example/models"
     "github.com/mgutz/razor/example/views"
     "github.com/mgutz/razor/html"
   )
-  +func (user *models.User)
+  +params (user *models.User)
   data := razor.ViewData{
     "title": "Razor + Go = love",
   }
-  +return Layout(VIEW, SECTIONS, data)
+  +extends Layout(data, ...)
 }
 
 <!-- helper.go -->

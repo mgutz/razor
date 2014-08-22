@@ -29,7 +29,7 @@ Let's step through it. First define a layout, `views/layout/base.go.html`
 
 ```html
 @{
-    +func(title string, body *razor.SafeBuffer, sections razor.Sections)
+    +params (title string, ...)
 }
 
 <!DOCTYPE html>
@@ -37,12 +37,12 @@ Let's step through it. First define a layout, `views/layout/base.go.html`
 <head>
     <meta charset="utf-8" />
     <title>@title</title>
-    <link rel="stylesheet" href="/@locals["version"]/css/style.css">
-    @sections["css"]
+    <link rel="stylesheet" href="/@App["version"]/css/style.css">
+    @RenderSection("css")
 </head>
 <body>
-    <div class="container">@body</div>
-    @sections["js"]
+    <div class="container">@RenderBody()</div>
+    @RenderSection("js")
 </body>
 </html>
 ```
@@ -55,7 +55,13 @@ package "layout"
 
 func Base(title string, body *razor.SafeBuffer, sections razor.Sections) *razor.SafeBuffer {
     _buffer := razor.NewSafeBuffer()
-    locals := razor.Locals
+    App := razor.App
+    RenderBody := func() *razor.SafeBuffer {
+        return body
+    }
+    RenderSection := func(section string) *razor.SafeBuffer {
+        return sections[section]
+    }
 
     // ... markup written to _buffer
 
@@ -67,10 +73,11 @@ Key points
 
 1.  The package name is derived from the directory.
 2.  The function name is the basename of the template.
-3.  The generated function signature is derived from `+func` directive
+3.  The generated function signature is derived from `+params` directive
     and always has a return value of `*razor.SafeBuffer`
-4.  **razor** adds a `locals` variable accessible as `@locals`.
-    Call `razor.SetLocals` once to initialize locals for all templates.
+4.  params `...` means insert body and section variables
+4.  **razor** adds an `App` variable accessible as `@App` representing app-wide state.
+    Call `razor.SetAppState` once to initialize the `App` map.
 
 Let's now define a view `views/index.go.html` function to use the layout.
 
@@ -79,9 +86,8 @@ Let's now define a view `views/index.go.html` function to use the layout.
     +import (
         "views/layout"
     )
-    +func (name string)
-    title := "Welcome"
-    +return layout.Base(title, VIEW, SECTIONS)
+    +params (name string)
+    +extends layout.Base("Welcome " + name, ...)
 }
 
 <h2>Welcome to homepage</h2>
@@ -95,14 +101,8 @@ Let's now define a view `views/index.go.html` function to use the layout.
 
 Key points
 
-The `+return` directive instructs razor to call `layout.Base` with arguments `title`, `VIEW`
-and `SECTIONS` which corresponds to the parameters defined in the layout.
-
-There are two reserved keywords which may be used in the return statement
-
-- `VIEW`:  the rendered buffer of the view, ie everything outside of sections aka body
-- `SECTIONS`: a map of rendered buffer sections by name
-
+The `+extends` directive instructs razor to call `layout.Base` with a title argument and
+the `...` means insert rendered view and section variables here.
 
 ## Using Generated Package
 
@@ -111,7 +111,7 @@ To call from Go code
 ```go
 import (
     "views"
-    "shared"
+    "models"
 )
 
 func viewHandler(w http.ResponseWriter, r *http.Request) {
@@ -120,7 +120,7 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	razor.SetLocals(map[string]interface{}{
+	razor.SetAppState(map[string]interface{}{
 		"version": "1.0.0",
 	})
 
@@ -155,5 +155,3 @@ To watch and rebuild on change
 ## Credit
 
 This package is a fork of [sipin gorazor](https://github.com/sipin/gorazor).
-
-// views.Render("admin/foo", razor.M{"title": "Welcome"}).WriteTo(w)

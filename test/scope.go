@@ -12,10 +12,6 @@ import (
 // Scope is generated
 func Scope() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals
-	if locals != nil {
-		// avoids not declared error if locals is not used
-	}
 	var obj *models.Widget
 	{
 		data, dmType := dm.GetData(obj.PlaceHolder)

@@ -9,10 +9,6 @@ import (
 // Double_quote is generated
 func Double_quote() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals
-	if locals != nil {
-		// avoids not declared error if locals is not used
-	}
 	_buffer.WriteString("<meta charset=\"utf-8\" />")
 
 	return _buffer

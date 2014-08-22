@@ -9,10 +9,6 @@ import (
 // Var is generated
 func Var() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals
-	if locals != nil {
-		// avoids not declared error if locals is not used
-	}
 	var totalMessage int
 
 	return _buffer

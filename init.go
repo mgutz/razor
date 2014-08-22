@@ -1,7 +1,7 @@
 package razor
 
-var Locals map[string]interface{}
+var App map[string]interface{}
 
-func SetLocals(locals map[string]interface{}) {
-	Locals = locals
+func SetAppState(state map[string]interface{}) {
+	App = state
 }

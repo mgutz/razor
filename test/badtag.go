@@ -9,10 +9,6 @@ import (
 // Badtag is generated
 func Badtag(w *gorazor.Widget) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals
-	if locals != nil {
-		// avoids not declared error if locals is not used
-	}
 	if w.ErrorMsg != "" {
 
 		_buffer.WriteString("<div class=\"form-group has-error\">\n	<div class=\"alert alert-danger\">")

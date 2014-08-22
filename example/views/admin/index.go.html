@@ -3,11 +3,11 @@
     "github.com/mgutz/razor/example/models"
     "github.com/mgutz/razor/example/views"
   )
-  +func (user *models.User)
+  +params (user *models.User)
   data := razor.ViewData{
     "title": "Razor + Go = love",
   }
-  +return Layout(SECTIONS, data)
+  +extends Layout(data, ...)
 }
 
 

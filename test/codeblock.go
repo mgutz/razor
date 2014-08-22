@@ -9,10 +9,6 @@ import (
 // Codeblock is generated
 func Codeblock() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals
-	if locals != nil {
-		// avoids not declared error if locals is not used
-	}
 
 	return _buffer
 }

@@ -11,10 +11,6 @@ import (
 // Edit is generated
 func Edit() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals
-	if locals != nil {
-		// avoids not declared error if locals is not used
-	}
 	var u *models.User
 	_buffer.WriteString("\n<div style=\"width: 500px\">\n<form role=\"form\">\n  <div class=\"form-group\">\n    <label for=\"exampleInputEmail1\">名字</label>\n    <input type=\"email\" class=\"form-control\" id=\"exampleInputEmail1\" placeholder=\"Enter email\" value=\"")
 	_buffer.WriteSafe(u.Name)

@@ -12,10 +12,6 @@ import (
 // Argsbug is generated
 func Argsbug(totalMessage int, u *User) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals
-	if locals != nil {
-		// avoids not declared error if locals is not used
-	}
 
 	messages := []string{}
 	_buffer.WriteString("\n\n<p>")

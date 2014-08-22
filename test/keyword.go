@@ -9,10 +9,6 @@ import (
 // Keyword is generated
 func Keyword() *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
-	locals := razor.Locals
-	if locals != nil {
-		// avoids not declared error if locals is not used
-	}
 	_buffer.WriteString("BLK(<span>rememberingsteve@apple.com ")
 	_buffer.WriteSafe(username)
 	_buffer.WriteString("</span>)BLK")
