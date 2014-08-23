@@ -19,7 +19,7 @@ func Index(user *models.User) *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()
 		views.Heading2("Admin area")
 
-		_buffer.WriteString("Use sections for body to be consisten and it simplifies code")
+		_buffer.WriteString("Use foo sections for body to be consisten and it simplifies code")
 
 		return _buffer
 	}
@@ -27,10 +27,11 @@ func Index(user *models.User) *razor.SafeBuffer {
 	bodyFoot := func() *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()
 
-		_buffer.WriteString("<script>\n    alert('Hello, ")
+		_buffer.WriteString("<!-- <script> -->\n  <!--   alert('Hello, ")
 		_buffer.WriteSafe(user.Name)
-		_buffer.WriteString("');\n  </script>")
+		_buffer.WriteString("'); -->\n  <!-- </script>")
 
+		_buffer.WriteString("-->")
 		return _buffer
 	}
 

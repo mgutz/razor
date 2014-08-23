@@ -27,10 +27,11 @@ func Index(user *models.User) *razor.SafeBuffer {
 	bodyFoot := func() *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()
 
-		_buffer.WriteString("<script>\n    alert('Hello, ")
+		_buffer.WriteString("<!-- <script> -->\n  <!--   alert('Hello, ")
 		_buffer.WriteSafe(user.Name)
-		_buffer.WriteString("');\n  </script>")
+		_buffer.WriteString("'); -->\n  <!-- </script>")
 
+		_buffer.WriteString("-->")
 		return _buffer
 	}
 

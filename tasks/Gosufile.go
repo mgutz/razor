@@ -9,15 +9,16 @@ func Tasks(p *Project) {
 	p.Task("default", Pre{"views"})
 
 	p.Task("views", Watch{"example/views/**/*.go.html"}, Pre{"build"}, func() {
-		util.Exec("razor views views", M{"Dir": "example"})
+		util.Run("razor views views", M{"Dir": "example"})
 	})
 
-	p.Task("example", Pre{"views"}, func() {
-		util.Exec("go run main.go", M{"Dir": "example"})
+	p.Task("example", Pre{"views"}, Watch{"example/**/*.go"}, func() {
+		util.Run("go install", M{"Dir": "example"})
+		util.Start("example", M{"Dir": "example"})
 	})
 
 	p.Task("build", func() {
-		util.Exec("go install", M{"Dir": "cmd/razor"})
+		util.Run("go install", M{"Dir": "cmd/razor"})
 	})
 }
 

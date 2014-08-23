@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
+	"time"
 
 	"github.com/mgutz/razor"
 	"github.com/mgutz/razor/example/models"
@@ -23,6 +25,9 @@ func frontHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	razor.SetAppState(razor.M{
 		"version": "1.0.0",
+		"now":     time.Now().UnixNano(),
+		"pid":     os.Getpid(),
+		"ppid":    os.Getppid(),
 	})
 
 	http.HandleFunc("/", frontHandler)
