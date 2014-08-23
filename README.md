@@ -146,12 +146,14 @@ See [working example](example).
 To build
 
     # get gosu task runner
+    go get -u github.com/mgutz/gosu
     go get -u github.com/mgutz/gosu/cmd/gosu
-    gosu views
 
-To watch and rebuild on change
+    gosu example
 
-    gosu views --watch
+To rebuild views and restart server on change
+
+    gosu example --watch
 
 ## Credit
 
