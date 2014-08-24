@@ -36,9 +36,5 @@ func Add(content string, err string) *razor.SafeBuffer {
 		return _buffer
 	}
 
-	_sections := make(razor.Sections)
-	_sections["title"] = title()
-	_sections["js"] = js()
-
 	return _buffer
 }

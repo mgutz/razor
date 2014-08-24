@@ -108,9 +108,5 @@ func Home() *razor.SafeBuffer {
 		return _buffer
 	}
 
-	_sections := make(razor.Sections)
-	_sections["title"] = title()
-	_sections["side"] = side()
-
 	return _buffer
 }

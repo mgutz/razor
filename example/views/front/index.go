@@ -23,20 +23,62 @@ func Index(user *models.User) *razor.SafeBuffer {
 	_buffer.WriteSafe(views.SafeHello(user.Name))
 	_buffer.WriteString("</p>\n\n<!-- avoid using Raw, create a function that returns SafeBuffer instead -->")
 	_buffer.WriteSafe(html.Raw("<h2>Heading 2</h2>"))
+	_buffer.WriteString("\n\n\n<h3>Code Block</h3>")
+
+	isPositive := true
+	if isPositive {
+
+		_buffer.WriteString("Half full")
+
+	} else {
+
+		_buffer.WriteString("Half empty")
+
+	}
+	_buffer.WriteString("\n\n<h3>Combining Text and markup</h3>")
+	fruits := []string{"apple", "orange", "pear"}
+	_buffer.WriteString("\n\n<ul>\n    ")
+	for _, fruit := range fruits {
+
+		_buffer.WriteString("<li>")
+		_buffer.WriteSafe(fruit)
+		_buffer.WriteString("</li>")
+
+	}
+	_buffer.WriteString("\n</ul>\n\n<h3>Email address</h3>\n\nE-mail is special case that is recognized by Razor.")
+	domain := "@mgutz.com"
+	_buffer.WriteString("\n<p>mario@mgutz.com</p>\n<p>mario")
+	_buffer.WriteSafe(domain)
+	_buffer.WriteString("</p>\n\n<h3>Explicit expression</h3>")
+	foo := "foo"
+
+	foobar := "xxxxxx"
+	if foobar == "" {
+	}
+	_buffer.WriteSafe((foo))
+	_buffer.WriteString("bar\n\n\n<h3>Escaping the @sign</h3>\n\n@robinwilliams You so funny!\n\n<h3>Server Side Comment</h3>\n\n*\nOur users whine so much but they got mula!\n*@\n\n\n<h3>Mixing expressions and text</h3>")
+
+	title := "Mr"
+	name := "Peabody"
+
+	_buffer.WriteString("\nHello ")
+	_buffer.WriteSafe(title)
+	_buffer.WriteString(". ")
+	_buffer.WriteSafe(name)
+	_buffer.WriteString(".")
 
 	bodyFoot := func() *razor.SafeBuffer {
 		_buffer := razor.NewSafeBuffer()
 
-		_buffer.WriteString("<!-- <script> -->\n  <!--   alert('Hello, ")
+		_buffer.WriteString("<script>\n    console.log('Hello, ")
 		_buffer.WriteSafe(user.Name)
-		_buffer.WriteString("'); -->\n  <!-- </script>")
+		_buffer.WriteString("');\n  </script>")
 
-		_buffer.WriteString("-->")
 		return _buffer
 	}
 
 	_sections := make(razor.Sections)
 	_sections["bodyFoot"] = bodyFoot()
-	_buffer = Layout(data, _buffer, _sections)
+	_buffer = Layout(data, _buffer, &_sections)
 	return _buffer
 }

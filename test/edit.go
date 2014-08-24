@@ -26,8 +26,5 @@ func Edit() *razor.SafeBuffer {
 		return _buffer
 	}
 
-	_sections := make(razor.Sections)
-	_sections["title"] = title()
-
 	return _buffer
 }

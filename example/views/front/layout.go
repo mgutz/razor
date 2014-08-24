@@ -7,7 +7,7 @@ import (
 )
 
 // Layout is generated
-func Layout(data razor.M, body *razor.SafeBuffer, sections razor.Sections) *razor.SafeBuffer {
+func Layout(data razor.M, body *razor.SafeBuffer, psections *razor.Sections) *razor.SafeBuffer {
 	_buffer := razor.NewSafeBuffer()
 
 	App := razor.App
@@ -17,6 +17,7 @@ func Layout(data razor.M, body *razor.SafeBuffer, sections razor.Sections) *razo
 	}
 
 	RenderSection := func(section string, required ...bool) *razor.SafeBuffer {
+		sections := *psections
 		text := sections[section]
 		isRequired := len(required) == 1 && required[0]
 		if text == nil && isRequired {

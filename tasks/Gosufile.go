@@ -13,7 +13,7 @@ func Tasks(p *Project) {
 	})
 
 	p.Task("example", Pre{"views"}, Watch{"example/**/*.go"}, func() {
-		util.Run("go install", M{"Dir": "example"})
+		util.Run("go build -o example main.go", M{"Dir": "example"})
 		util.Start("example", M{"Dir": "example"})
 	})
 

@@ -38,6 +38,6 @@ func Index(user *models.User) *razor.SafeBuffer {
 	_sections := make(razor.Sections)
 	_sections["body"] = body()
 	_sections["bodyFoot"] = bodyFoot()
-	_buffer = Layout(data, _buffer, _sections)
+	_buffer = Layout(data, _buffer, &_sections)
 	return _buffer
 }

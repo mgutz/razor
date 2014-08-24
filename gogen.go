@@ -153,10 +153,13 @@ func (cp *Compiler) visitFirstBLK(blk *Ast) {
 			cp.imports[l] = true
 		} else if strings.HasPrefix(l, "+params") {
 			vname := l[7:]
-			cp.params = strings.Replace(vname, "...)", "body *razor.SafeBuffer, sections razor.Sections)", 1)
+			cp.params = strings.Replace(vname, "...)", "body *razor.SafeBuffer, psections *razor.Sections)", 1)
 		} else if strings.HasPrefix(l, "+extends ") {
 			vname := l[9:]
-			cp.result = strings.Replace(vname, "...)", "_buffer, _sections)", 1)
+			cp.result = vname
+		} else if strings.HasPrefix(l, "+return ") {
+			vname := l[8:]
+			cp.result = vname
 		} else if l != "" {
 			cp.addPart(Part{CSTAT, l + "\n"})
 		}
@@ -268,18 +271,20 @@ func (cp *Compiler) processLayout() {
 	}
 	cp.buf = out
 
-	if len(sections) > 0 {
-		cp.buf += "_sections := make(razor.Sections)\n"
-		for _, section := range sections {
-			cp.buf += fmt.Sprintf("_sections[\"%s\"] = %s()\n", section, section)
-		}
-	}
-
 	if cp.result != "" {
-		cp.buf += "_buffer = " + cp.result
+		var result string
+		if len(sections) > 0 {
+			cp.buf += "_sections := make(razor.Sections)\n"
+			for _, section := range sections {
+				cp.buf += fmt.Sprintf("_sections[\"%s\"] = %s()\n", section, section)
+			}
+			result = strings.Replace(cp.result, "...)", "_buffer, &_sections)", 1)
+		} else {
+			result = strings.Replace(cp.result, "...)", "_buffer, nil)", 1)
+		}
+		cp.buf += "_buffer = " + result
 	}
 	cp.buf += "\n return _buffer\n}\n"
-
 }
 
 func (cp *Compiler) visit() {
@@ -316,6 +321,7 @@ func (cp *Compiler) visit() {
 	if cp.defineRenderSection {
 		head.WriteString(`
 			RenderSection := func(section string, required ...bool) *razor.SafeBuffer {
+				sections := *psections
 				text := sections[section]
 				isRequired := len(required) == 1 && required[0]
 				if text == nil && isRequired {

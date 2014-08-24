@@ -8,7 +8,7 @@
   data := razor.M{
     "title": "Razor + Go = love",
   }
-  +extends Layout(data, ...)
+  +return Layout(data, ...)
 }
 
 <!-- helper.go -->
@@ -20,8 +20,69 @@
 <!-- avoid using Raw, create a function that returns SafeBuffer instead -->
 @html.Raw("<h2>Heading 2</h2>")
 
+
+<h3>Code Block</h3>
+
+@{
+  isPositive := true
+}
+
+@if isPositive {
+    <text>Half full</text>
+} else {
+    @:Half empty
+}
+
+<h3>Combining Text and markup</h3>
+
+@{ fruits := []string{"apple", "orange", "pear"} }
+
+<ul>
+    @for _, fruit := range fruits {
+        <li>@fruit</li>
+    }
+</ul>
+
+<h3>Email address</h3>
+
+E-mail is special case that is recognized by Razor.
+
+@{ domain := "@mgutz.com" }
+<p>mario@mgutz.com</p>
+<p>mario@domain</p>
+
+<h3>Explicit expression</h3>
+
+@{ foo := "foo" }
+@{
+    foobar := "xxxxxx"
+    if foobar == "" {}
+}
+
+@(foo)bar
+
+
+<h3>Escaping the @@sign</h3>
+
+@@robinwilliams You so funny!
+
+<h3>Server Side Comment</h3>
+
+@*
+Our users whine so much but they got mula!
+*@
+
+
+<h3>Mixing expressions and text</h3>
+@{
+    title := "Mr"
+    name := "Peabody"
+
+}
+Hello @title. @name.
+
 @section bodyFoot {
-  <!-- <script> -->
-  <!--   alert('Hello, @user.Name'); -->
-  <!-- </script> -->
+  <script>
+    console.log('Hello, @user.Name');
+  </script>
 }

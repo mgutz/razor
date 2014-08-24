@@ -44,9 +44,5 @@ func Index() *razor.SafeBuffer {
 		return _buffer
 	}
 
-	_sections := make(razor.Sections)
-	_sections["js"] = js()
-	_sections["title"] = title()
-
 	return _buffer
 }

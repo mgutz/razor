@@ -24,8 +24,5 @@ func Sectionbug() *razor.SafeBuffer {
 		return _buffer
 	}
 
-	_sections := make(razor.Sections)
-	_sections["js"] = js()
-
 	return _buffer
 }
