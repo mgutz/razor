@@ -18,6 +18,14 @@ Running
 razor <folder or file> <output folder or file>
 ```
 
+
+## Benchmarks
+
+See `benchfiles/` directory
+
+    BenchmarkGoTemplate	  200000	     12786 ns/op
+    BenchmarkRazor	  500000	      4015 ns/op
+
 ## Layout & Views
 
 Let's cover the basic use case of a view with a layout. In **razor** each template becomes

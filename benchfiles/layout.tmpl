@@ -1,0 +1,28 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html>
+    <body>
+
+      <header>
+        <h1>{{.FirstName}} {{.LastName}} {{.Age}}</h1>
+        <nav>
+          <ul>
+		{{range $hobby := .Hobbies}}
+            	  	<li><a href="hoge">{{ $hobby }}</a></li>
+		{{ end }}
+          </ul>
+        </nav>
+      </header>
+
+      <article id="content">
+        {{template "body"}}
+      </article>
+
+      <footer>
+        &copy; Copyright 2013 by golang-samples.
+      </footer>
+
+      {{template "scripts"}}
+    </body>
+</html>
+{{end}}

@@ -1,0 +1,29 @@
+@{
+  +params(u *User, ...)
+}
+<!DOCTYPE html>
+<html>
+    <body>
+
+      <header>
+        <h1>@u.FirstName @u.LastName @u.Age</h1>
+        <nav>
+          <ul>
+            @for _, hobby := range u.Hobbies {
+              <li><a href="hobby">@hobby</a></li>
+            }
+          </ul>
+        </nav>
+      </header>
+
+      <article id="content">
+        @RenderBody()
+      </article>
+
+      <footer>
+        &copy; Copyright 2013 by golang-samples.
+      </footer>
+
+      @RenderSection('scripts')
+    </body>
+</html>
