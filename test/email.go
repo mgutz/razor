@@ -8,10 +8,10 @@ import (
 
 // Email is generated
 func Email() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
-	_buffer.WriteString("<span>rememberingsteve@apple.com ")
-	_buffer.WriteSafe(username)
-	_buffer.WriteString("</span>")
+	__buffer := razor.NewSafeBuffer()
+	__buffer.WriteString("<span>rememberingsteve@apple.com ")
+	__buffer.WriteSafe(username)
+	__buffer.WriteString("</span>")
 
-	return _buffer
+	return __buffer
 }

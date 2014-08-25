@@ -7,29 +7,41 @@ import (
 )
 
 // Layout is generated
-func Layout(u *User, body *razor.SafeBuffer, psections *razor.Sections) *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+func Layout(u *User, __body *razor.SafeBuffer, __sections *razor.Sections) *razor.SafeBuffer {
+	__buffer := razor.NewSafeBuffer()
 
 	RenderBody := func() *razor.SafeBuffer {
-		return body
+		return __body
 	}
-	_buffer.WriteString("\n<!DOCTYPE html>\n<html>\n    <body>\n\n      <header>\n        <h1>")
-	_buffer.WriteSafe(u.FirstName)
-	_buffer.WriteString(" ")
-	_buffer.WriteSafe(u.LastName)
-	_buffer.WriteString(" ")
-	_buffer.WriteSafe(u.Age)
-	_buffer.WriteString("</h1>\n        <nav>\n          <ul>\n            ")
+
+	RenderSection := func(section string, required ...bool) *razor.SafeBuffer {
+		sections := *__sections
+		text := sections[section]
+		isRequired := len(required) == 1 && required[0]
+		if text == nil && isRequired {
+			return razor.NewSafeBufferString("<div style='color:white; background-color: red'>SECTION " + section + " is required!<div>")
+		}
+		return text
+	}
+	__buffer.WriteString("\n<!DOCTYPE html>\n<html>\n    <body>\n\n      <header>\n        <h1>")
+	__buffer.WriteSafe(u.FirstName)
+	__buffer.WriteString(" ")
+	__buffer.WriteSafe(u.LastName)
+	__buffer.WriteString(" ")
+	__buffer.WriteSafe(u.Age)
+	__buffer.WriteString("</h1>\n        <nav>\n          <ul>\n            ")
 	for _, hobby := range u.Hobbies {
 
-		_buffer.WriteString("<li><a href=\"hobby\">")
-		_buffer.WriteSafe(hobby)
-		_buffer.WriteString("</a></li>")
+		__buffer.WriteString("<li><a href=\"hobby\">")
+		__buffer.WriteSafe(hobby)
+		__buffer.WriteString("</a></li>")
 
 	}
-	_buffer.WriteString("\n          </ul>\n        </nav>\n      </header>\n\n      <article id=\"content\">\n        ")
-	_buffer.WriteSafe(RenderBody())
-	_buffer.WriteString("\n      </article>\n\n      <footer>\n        &copy; Copyright 2013 by golang-samples.\n      </footer>\n    </body>\n</html>")
+	__buffer.WriteString("\n          </ul>\n        </nav>\n      </header>\n\n      <article id=\"content\">\n        ")
+	__buffer.WriteSafe(RenderBody())
+	__buffer.WriteString("\n      </article>\n\n      <footer>\n        &copy; Copyright 2013 by golang-samples.\n      </footer>\n\n      ")
+	__buffer.WriteSafe(RenderSection("scripts"))
+	__buffer.WriteString("\n    </body>\n</html>")
 
-	return _buffer
+	return __buffer
 }

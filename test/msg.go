@@ -9,7 +9,7 @@ import (
 
 // Msg is generated
 func Msg() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 	var u *User
 
 	getName := func(u *User) string {
@@ -20,11 +20,11 @@ func Msg() *razor.SafeBuffer {
 	if u.Email != "" {
 		username = getName(u) + "(" + u.Email + ")"
 	}
-	_buffer.WriteString("\n<div class=\"welcome\">\n<h4>Hello ")
-	_buffer.WriteSafe(username)
-	_buffer.WriteString("</h4>\n\n<div>")
-	_buffer.WriteSafe((u.Intro))
-	_buffer.WriteString("</div>\n</div>")
+	__buffer.WriteString("\n<div class=\"welcome\">\n<h4>Hello ")
+	__buffer.WriteSafe(username)
+	__buffer.WriteString("</h4>\n\n<div>")
+	__buffer.WriteSafe((u.Intro))
+	__buffer.WriteString("</div>\n</div>")
 
-	return _buffer
+	return __buffer
 }

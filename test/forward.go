@@ -9,12 +9,12 @@ import (
 
 // Forward is generated
 func Forward() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 	var content string
 	var err string
 
 	//hello word
 	/* hello this */
 
-	return _buffer
+	return __buffer
 }

@@ -23,8 +23,8 @@ razor <folder or file> <output folder or file>
 
 See `benchfiles/` directory
 
-    BenchmarkGoTemplate	  200000	     12786 ns/op
-    BenchmarkRazor	  500000	      4015 ns/op
+    BenchmarkGoTemplate  200000	     13013 ns/op
+    BenchmarkRazor       500000	      4661 ns/op
 
 ## Layout & Views
 

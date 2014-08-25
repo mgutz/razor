@@ -10,9 +10,9 @@ import (
 
 // Slashbug is generated
 func Slashbug(objs ...*models.Widget) *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 
 	size := strconv.Itoa(12 / len(objs))
 
-	return _buffer
+	return __buffer
 }

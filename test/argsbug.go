@@ -11,12 +11,12 @@ import (
 
 // Argsbug is generated
 func Argsbug(totalMessage int, u *User) *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 
 	messages := []string{}
-	_buffer.WriteString("\n\n<p>")
-	_buffer.WriteSafe(gorazor.Itoa(args(messages...)))
-	_buffer.WriteString("</p>")
+	__buffer.WriteString("\n\n<p>")
+	__buffer.WriteSafe(gorazor.Itoa(args(messages...)))
+	__buffer.WriteString("</p>")
 
-	return _buffer
+	return __buffer
 }

@@ -8,11 +8,11 @@ import (
 
 // Bug8 is generated
 func Bug8() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 	var l *Locale
-	_buffer.WriteString("\n<span>")
-	_buffer.WriteSafe(l.T("for"))
-	_buffer.WriteString("</span>")
+	__buffer.WriteString("\n<span>")
+	__buffer.WriteSafe(l.T("for"))
+	__buffer.WriteString("</span>")
 
-	return _buffer
+	return __buffer
 }

@@ -11,7 +11,7 @@ import (
 
 // Scope is generated
 func Scope() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 	var obj *models.Widget
 	{
 		data, dmType := dm.GetData(obj.PlaceHolder)
@@ -19,74 +19,74 @@ func Scope() *razor.SafeBuffer {
 		if dmType == "simple" {
 			obj.StringList = data.([]string)
 
-			_buffer.WriteString("<div>")
-			_buffer.WriteSafe((SelectPk(obj)))
-			_buffer.WriteString("</div>")
+			__buffer.WriteString("<div>")
+			__buffer.WriteSafe((SelectPk(obj)))
+			__buffer.WriteString("</div>")
 
 		} else {
 			node := data.(*dm.DMTree)
 
-			_buffer.WriteString("<div class=\"form-group ")
-			_buffer.WriteSafe(GetErrorClass(obj))
-			_buffer.WriteString("\">\n  <label for=\"")
-			_buffer.WriteSafe(obj.Name)
-			_buffer.WriteString("\" class=\"col-sm-2 control-label\">")
-			_buffer.WriteSafe(obj.Label)
-			_buffer.WriteString("</label>\n  <div class=\"col-sm-10\">\n    <select class=\"form-control\" name=\"")
-			_buffer.WriteSafe(obj.Name)
-			_buffer.WriteString("\" ")
-			_buffer.WriteSafe(BoolStr(obj.Disabled, "disabled"))
-			_buffer.WriteString(">\n      ")
+			__buffer.WriteString("<div class=\"form-group ")
+			__buffer.WriteSafe(GetErrorClass(obj))
+			__buffer.WriteString("\">\n  <label for=\"")
+			__buffer.WriteSafe(obj.Name)
+			__buffer.WriteString("\" class=\"col-sm-2 control-label\">")
+			__buffer.WriteSafe(obj.Label)
+			__buffer.WriteString("</label>\n  <div class=\"col-sm-10\">\n    <select class=\"form-control\" name=\"")
+			__buffer.WriteSafe(obj.Name)
+			__buffer.WriteString("\" ")
+			__buffer.WriteSafe(BoolStr(obj.Disabled, "disabled"))
+			__buffer.WriteString(">\n      ")
 			for _, option := range node.Keys {
 				if values, ok := node.Values[option]; ok {
 
-					_buffer.WriteString("<optgroup label=\"")
-					_buffer.WriteSafe(option)
-					_buffer.WriteString("\">\n        ")
+					__buffer.WriteString("<optgroup label=\"")
+					__buffer.WriteSafe(option)
+					__buffer.WriteString("\">\n        ")
 					for _, value := range values {
 						if value == obj.Value {
 
-							_buffer.WriteString("<option selected>")
-							_buffer.WriteSafe(value)
-							_buffer.WriteString("</option>")
+							__buffer.WriteString("<option selected>")
+							__buffer.WriteSafe(value)
+							__buffer.WriteString("</option>")
 
 						} else {
 
-							_buffer.WriteString("<option>")
-							_buffer.WriteSafe(value)
-							_buffer.WriteString("</option>")
+							__buffer.WriteString("<option>")
+							__buffer.WriteSafe(value)
+							__buffer.WriteString("</option>")
 
 						}
 					}
-					_buffer.WriteString("\n      </optgroup>")
+					__buffer.WriteString("\n      </optgroup>")
 
 				} else {
 					if option == obj.Value {
 
-						_buffer.WriteString("<option selected>")
-						_buffer.WriteSafe(option)
-						_buffer.WriteString("</option>")
+						__buffer.WriteString("<option selected>")
+						__buffer.WriteSafe(option)
+						__buffer.WriteString("</option>")
 
 					} else {
 
-						_buffer.WriteString("<option>")
-						_buffer.WriteSafe(option)
-						_buffer.WriteString("</option>")
+						__buffer.WriteString("<option>")
+						__buffer.WriteSafe(option)
+						__buffer.WriteString("</option>")
 
 					}
 				}
 			}
-			_buffer.WriteString("\n    </select>\n    ")
+			__buffer.WriteString("\n    </select>\n    ")
 			if obj.ErrorMsg != "" {
 
-				_buffer.WriteString("<span class=\"label label-danger\">")
-				_buffer.WriteSafe(obj.ErrorMsg)
-				_buffer.WriteString("</span>")
+				__buffer.WriteString("<span class=\"label label-danger\">")
+				__buffer.WriteSafe(obj.ErrorMsg)
+				__buffer.WriteString("</span>")
 
 			}
-			_buffer.WriteString("\n  </div>\n</div>")
+			__buffer.WriteString("\n  </div>\n</div>")
 		}
 	}
 
-	return _buffer
+	return __buffer
 }

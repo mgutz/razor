@@ -9,10 +9,10 @@ import (
 
 // Inline_var is generated
 func Inline_var() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
-	_buffer.WriteString("\n\n<body>")
-	_buffer.WriteSafe(Hello("Felix Sun", "h1", 30, &models.Author{"Van", 20}, 10))
-	_buffer.WriteString("\n</body>")
+	__buffer := razor.NewSafeBuffer()
+	__buffer.WriteString("\n\n<body>")
+	__buffer.WriteSafe(Hello("Felix Sun", "h1", 30, &models.Author{"Van", 20}, 10))
+	__buffer.WriteString("\n</body>")
 
-	return _buffer
+	return __buffer
 }

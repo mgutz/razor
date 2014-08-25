@@ -8,8 +8,8 @@ import (
 
 // Header is generated
 func Header() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
-	_buffer.WriteString("<div>Page Header</div>")
+	__buffer := razor.NewSafeBuffer()
+	__buffer.WriteString("<div>Page Header</div>")
 
-	return _buffer
+	return __buffer
 }

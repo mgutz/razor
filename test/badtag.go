@@ -8,29 +8,29 @@ import (
 
 // Badtag is generated
 func Badtag(w *gorazor.Widget) *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 	if w.ErrorMsg != "" {
 
-		_buffer.WriteString("<div class=\"form-group has-error\">\n	<div class=\"alert alert-danger\">")
-		_buffer.WriteSafe(w.ErrorMsg)
-		_buffer.WriteString("</div>")
+		__buffer.WriteString("<div class=\"form-group has-error\">\n	<div class=\"alert alert-danger\">")
+		__buffer.WriteSafe(w.ErrorMsg)
+		__buffer.WriteString("</div>")
 	} else {
 
-		_buffer.WriteString("<div class=\"form-group\">")
+		__buffer.WriteString("<div class=\"form-group\">")
 	}
-	_buffer.WriteString("\n\n	<label for=\"")
-	_buffer.WriteSafe(w.Name)
-	_buffer.WriteString("\">")
-	_buffer.WriteSafe(w.Label)
-	_buffer.WriteString("</label>\n	<input type=\"text\" name=\"")
-	_buffer.WriteSafe(w.Name)
-	_buffer.WriteString("\" class=\"form-control\" id=\"")
-	_buffer.WriteSafe(w.Name)
-	_buffer.WriteString("\" placeholder=\"")
-	_buffer.WriteSafe(w.PlaceHolder)
-	_buffer.WriteString("\" value=\"")
-	_buffer.WriteSafe(w.Value)
-	_buffer.WriteString("\">\n</div>")
+	__buffer.WriteString("\n\n	<label for=\"")
+	__buffer.WriteSafe(w.Name)
+	__buffer.WriteString("\">")
+	__buffer.WriteSafe(w.Label)
+	__buffer.WriteString("</label>\n	<input type=\"text\" name=\"")
+	__buffer.WriteSafe(w.Name)
+	__buffer.WriteString("\" class=\"form-control\" id=\"")
+	__buffer.WriteSafe(w.Name)
+	__buffer.WriteString("\" placeholder=\"")
+	__buffer.WriteSafe(w.PlaceHolder)
+	__buffer.WriteString("\" value=\"")
+	__buffer.WriteSafe(w.Value)
+	__buffer.WriteString("\">\n</div>")
 
-	return _buffer
+	return __buffer
 }

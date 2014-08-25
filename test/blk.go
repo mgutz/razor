@@ -8,7 +8,7 @@ import (
 
 // Blk is generated
 func Blk() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 
-	return _buffer
+	return __buffer
 }

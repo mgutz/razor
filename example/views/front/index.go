@@ -11,74 +11,74 @@ import (
 
 // Index is generated
 func Index(user *models.User) *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 	data := razor.M{
 		"title": "Razor + Go = love",
 	}
-	_buffer.WriteString("\n\n<!-- helper.go -->")
-	_buffer.WriteSafe(views.Heading2("FOO Razor rocks"))
-	_buffer.WriteString("\n\n<p>Escaped: ")
-	_buffer.WriteSafe(views.UnsafeHello(user.Name))
-	_buffer.WriteString("</p>\n<p>Unescaped: ")
-	_buffer.WriteSafe(views.SafeHello(user.Name))
-	_buffer.WriteString("</p>\n\n<!-- avoid using Raw, create a function that returns SafeBuffer instead -->")
-	_buffer.WriteSafe(html.Raw("<h2>Heading 2</h2>"))
-	_buffer.WriteString("\n\n\n<h3>Code Block</h3>")
+	__buffer.WriteString("\n\n<!-- helper.go -->")
+	__buffer.WriteSafe(views.Heading2("FOO Razor rocks"))
+	__buffer.WriteString("\n\n<p>Escaped: ")
+	__buffer.WriteSafe(views.UnsafeHello(user.Name))
+	__buffer.WriteString("</p>\n<p>Unescaped: ")
+	__buffer.WriteSafe(views.SafeHello(user.Name))
+	__buffer.WriteString("</p>\n\n<!-- avoid using Raw, create a function that returns SafeBuffer instead -->")
+	__buffer.WriteSafe(html.Raw("<h2>Heading 2</h2>"))
+	__buffer.WriteString("\n\n\n<h3>Code Block</h3>")
 
 	isPositive := true
 	if isPositive {
 
-		_buffer.WriteString("Half full")
+		__buffer.WriteString("Half full")
 
 	} else {
 
-		_buffer.WriteString("Half empty")
+		__buffer.WriteString("Half empty")
 
 	}
-	_buffer.WriteString("\n\n<h3>Combining Text and markup</h3>")
+	__buffer.WriteString("\n\n<h3>Combining Text and markup</h3>")
 	fruits := []string{"apple", "orange", "pear"}
-	_buffer.WriteString("\n\n<ul>\n    ")
+	__buffer.WriteString("\n\n<ul>\n    ")
 	for _, fruit := range fruits {
 
-		_buffer.WriteString("<li>")
-		_buffer.WriteSafe(fruit)
-		_buffer.WriteString("</li>")
+		__buffer.WriteString("<li>")
+		__buffer.WriteSafe(fruit)
+		__buffer.WriteString("</li>")
 
 	}
-	_buffer.WriteString("\n</ul>\n\n<h3>Email address</h3>\n\nE-mail is special case that is recognized by Razor.")
+	__buffer.WriteString("\n</ul>\n\n<h3>Email address</h3>\n\nE-mail is special case that is recognized by Razor.")
 	domain := "@mgutz.com"
-	_buffer.WriteString("\n<p>mario@mgutz.com</p>\n<p>mario")
-	_buffer.WriteSafe(domain)
-	_buffer.WriteString("</p>\n\n<h3>Explicit expression</h3>")
+	__buffer.WriteString("\n<p>mario@mgutz.com</p>\n<p>mario")
+	__buffer.WriteSafe(domain)
+	__buffer.WriteString("</p>\n\n<h3>Explicit expression</h3>")
 	foo := "foo"
 
 	foobar := "xxxxxx"
 	if foobar == "" {
 	}
-	_buffer.WriteSafe((foo))
-	_buffer.WriteString("bar\n\n\n<h3>Escaping the @sign</h3>\n\n@robinwilliams You so funny!\n\n<h3>Server Side Comment</h3>\n\n\n\n\n<h3>Mixing expressions and text</h3>")
+	__buffer.WriteSafe((foo))
+	__buffer.WriteString("bar\n\n\n<h3>Escaping the @sign</h3>\n\n@robinwilliams You so funny!\n\n<h3>Server Side Comment</h3>\n\n\nThis should be the only line\n\n<h3>Mixing expressions and text</h3>")
 
 	title := "Mr"
 	name := "Peabody"
 
-	_buffer.WriteString("\nHello ")
-	_buffer.WriteSafe(title)
-	_buffer.WriteString(". ")
-	_buffer.WriteSafe(name)
-	_buffer.WriteString(".")
+	__buffer.WriteString("\nHello ")
+	__buffer.WriteSafe(title)
+	__buffer.WriteString(". ")
+	__buffer.WriteSafe(name)
+	__buffer.WriteString(".")
 
-	bodyFoot := func() *razor.SafeBuffer {
-		_buffer := razor.NewSafeBuffer()
+	__bodyFoot := func() *razor.SafeBuffer {
+		__buffer := razor.NewSafeBuffer()
 
-		_buffer.WriteString("<script>\n    console.log('Hello, ")
-		_buffer.WriteSafe(user.Name)
-		_buffer.WriteString("');\n  </script>")
+		__buffer.WriteString("<script>\n    console.log('Hello, ")
+		__buffer.WriteSafe(user.Name)
+		__buffer.WriteString("');\n  </script>")
 
-		return _buffer
+		return __buffer
 	}
 
-	_sections := make(razor.Sections)
-	_sections["bodyFoot"] = bodyFoot()
-	_buffer = Layout(data, _buffer, &_sections)
-	return _buffer
+	__sections := make(razor.Sections)
+	__sections["bodyFoot"] = __bodyFoot()
+	__buffer = Layout(data, __buffer, &__sections)
+	return __buffer
 }

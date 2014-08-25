@@ -8,7 +8,7 @@ import (
 
 // Codeblock is generated
 func Codeblock() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 
-	return _buffer
+	return __buffer
 }

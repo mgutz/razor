@@ -8,8 +8,8 @@ import (
 
 // Quote is generated
 func Quote() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
-	_buffer.WriteString("<html>'text'</html>")
+	__buffer := razor.NewSafeBuffer()
+	__buffer.WriteString("<html>'text'</html>")
 
-	return _buffer
+	return __buffer
 }

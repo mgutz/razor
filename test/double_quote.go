@@ -8,8 +8,8 @@ import (
 
 // Double_quote is generated
 func Double_quote() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
-	_buffer.WriteString("<meta charset=\"utf-8\" />")
+	__buffer := razor.NewSafeBuffer()
+	__buffer.WriteString("<meta charset=\"utf-8\" />")
 
-	return _buffer
+	return __buffer
 }

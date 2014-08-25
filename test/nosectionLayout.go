@@ -7,13 +7,13 @@ import (
 )
 
 // NosectionLayout is generated
-func NosectionLayout(body *razor.SafeBuffer, psections *razor.Sections) *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+func NosectionLayout(__body *razor.SafeBuffer, __sections *razor.Sections) *razor.SafeBuffer {
+	__buffer := razor.NewSafeBuffer()
 
 	RenderBody := func() *razor.SafeBuffer {
-		return body
+		return __body
 	}
-	_buffer.WriteSafe(RenderBody())
+	__buffer.WriteSafe(RenderBody())
 
-	return _buffer
+	return __buffer
 }

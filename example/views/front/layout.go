@@ -7,17 +7,17 @@ import (
 )
 
 // Layout is generated
-func Layout(data razor.M, body *razor.SafeBuffer, psections *razor.Sections) *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+func Layout(data razor.M, __body *razor.SafeBuffer, __sections *razor.Sections) *razor.SafeBuffer {
+	__buffer := razor.NewSafeBuffer()
 
 	App := razor.App
 
 	RenderBody := func() *razor.SafeBuffer {
-		return body
+		return __body
 	}
 
 	RenderSection := func(section string, required ...bool) *razor.SafeBuffer {
-		sections := *psections
+		sections := *__sections
 		text := sections[section]
 		isRequired := len(required) == 1 && required[0]
 		if text == nil && isRequired {
@@ -25,17 +25,17 @@ func Layout(data razor.M, body *razor.SafeBuffer, psections *razor.Sections) *ra
 		}
 		return text
 	}
-	_buffer.WriteString("\n\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\" />\n    <title>")
-	_buffer.WriteSafe(data["title"])
-	_buffer.WriteString("</title>\n    <link rel=\"stylesheet\" href=\"/")
-	_buffer.WriteSafe(App["version"])
-	_buffer.WriteString("/css/style.css\">\n<body>\n    <div class=\"container\">\n      ")
-	_buffer.WriteSafe(RenderBody())
-	_buffer.WriteString("\n    </div>\n    ")
-	_buffer.WriteSafe(data["footer"])
-	_buffer.WriteString("\n    ")
-	_buffer.WriteSafe(RenderSection("bodyFoot"))
-	_buffer.WriteString("\n  </body>\n</html>")
+	__buffer.WriteString("\n\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\" />\n    <title>")
+	__buffer.WriteSafe(data["title"])
+	__buffer.WriteString("</title>\n    <link rel=\"stylesheet\" href=\"/")
+	__buffer.WriteSafe(App["version"])
+	__buffer.WriteString("/css/style.css\">\n<body>\n    <div class=\"container\">\n      ")
+	__buffer.WriteSafe(RenderBody())
+	__buffer.WriteString("\n    </div>\n    ")
+	__buffer.WriteSafe(data["footer"])
+	__buffer.WriteString("\n    ")
+	__buffer.WriteSafe(RenderSection("bodyFoot"))
+	__buffer.WriteString("\n  </body>\n</html>")
 
-	return _buffer
+	return __buffer
 }

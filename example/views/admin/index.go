@@ -10,34 +10,34 @@ import (
 
 // Index is generated
 func Index(user *models.User) *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 	data := razor.M{
 		"title": "Razor + Go = love",
 	}
 
-	body := func() *razor.SafeBuffer {
-		_buffer := razor.NewSafeBuffer()
+	__body := func() *razor.SafeBuffer {
+		__buffer := razor.NewSafeBuffer()
 		views.Heading2("Admin area")
 
-		_buffer.WriteString("Use foo sections for body to be consisten and it simplifies code")
+		__buffer.WriteString("Use foo sections for body to be consisten and it simplifies code")
 
-		return _buffer
+		return __buffer
 	}
 
-	bodyFoot := func() *razor.SafeBuffer {
-		_buffer := razor.NewSafeBuffer()
+	__bodyFoot := func() *razor.SafeBuffer {
+		__buffer := razor.NewSafeBuffer()
 
-		_buffer.WriteString("<!-- <script> -->\n  <!--   alert('Hello, ")
-		_buffer.WriteSafe(user.Name)
-		_buffer.WriteString("'); -->\n  <!-- </script>")
+		__buffer.WriteString("<!-- <script> -->\n  <!--   alert('Hello, ")
+		__buffer.WriteSafe(user.Name)
+		__buffer.WriteString("'); -->\n  <!-- </script>")
 
-		_buffer.WriteString("-->")
-		return _buffer
+		__buffer.WriteString("-->")
+		return __buffer
 	}
 
-	_sections := make(razor.Sections)
-	_sections["body"] = body()
-	_sections["bodyFoot"] = bodyFoot()
-	_buffer = Layout(data, _buffer, &_sections)
-	return _buffer
+	__sections := make(razor.Sections)
+	__sections["body"] = __body()
+	__sections["bodyFoot"] = __bodyFoot()
+	__buffer = Layout(data, __buffer, &__sections)
+	return __buffer
 }

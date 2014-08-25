@@ -10,19 +10,19 @@ import (
 
 // Sectionbug is generated
 func Sectionbug() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 
-	js := func() *razor.SafeBuffer {
-		_buffer := razor.NewSafeBuffer()
+	__js := func() *razor.SafeBuffer {
+		__buffer := razor.NewSafeBuffer()
 		for _, jsFile := range ctx.GetJS() {
 
-			_buffer.WriteString("<script src=\"")
-			_buffer.WriteSafe(jsFile)
-			_buffer.WriteString("\"></script>")
+			__buffer.WriteString("<script src=\"")
+			__buffer.WriteSafe(jsFile)
+			__buffer.WriteString("\"></script>")
 
 		}
-		return _buffer
+		return __buffer
 	}
 
-	return _buffer
+	return __buffer
 }

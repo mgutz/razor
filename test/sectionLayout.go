@@ -7,15 +7,15 @@ import (
 )
 
 // SectionLayout is generated
-func SectionLayout(body *razor.SafeBuffer, psections *razor.Sections) *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+func SectionLayout(__body *razor.SafeBuffer, __sections *razor.Sections) *razor.SafeBuffer {
+	__buffer := razor.NewSafeBuffer()
 
 	RenderBody := func() *razor.SafeBuffer {
-		return body
+		return __body
 	}
 
 	RenderSection := func(section string, required ...bool) *razor.SafeBuffer {
-		sections := *psections
+		sections := *__sections
 		text := sections[section]
 		isRequired := len(required) == 1 && required[0]
 		if text == nil && isRequired {
@@ -23,10 +23,10 @@ func SectionLayout(body *razor.SafeBuffer, psections *razor.Sections) *razor.Saf
 		}
 		return text
 	}
-	_buffer.WriteSafe(RenderBody())
-	_buffer.WriteString("\n\n<div class=\"side\">\n    ")
-	_buffer.WriteSafe(RenderSection("side"))
-	_buffer.WriteString("\n</div>")
+	__buffer.WriteSafe(RenderBody())
+	__buffer.WriteString("\n\n<div class=\"side\">\n    ")
+	__buffer.WriteSafe(RenderSection("side"))
+	__buffer.WriteString("\n</div>")
 
-	return _buffer
+	return __buffer
 }

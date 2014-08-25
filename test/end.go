@@ -11,33 +11,33 @@ import (
 
 // End is generated
 func End() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 	var totalMessage int
 	var u *User
-	_buffer.WriteSafe(helper.Header())
-	_buffer.WriteSafe(helper.Msg(u))
+	__buffer.WriteSafe(helper.Header())
+	__buffer.WriteSafe(helper.Msg(u))
 	for i := 0; i < 2; i++ {
 		if totalMessage > 0 {
 			if totalMessage == 1 {
 
-				_buffer.WriteString("<p>")
-				_buffer.WriteSafe(u.Name)
-				_buffer.WriteString(" has 1 message</p>")
+				__buffer.WriteString("<p>")
+				__buffer.WriteSafe(u.Name)
+				__buffer.WriteString(" has 1 message</p>")
 
 			} else {
 
-				_buffer.WriteString("<p>")
-				_buffer.WriteSafe(u.Name)
-				_buffer.WriteString(" has ")
-				_buffer.WriteSafe(gorazor.Itoa(totalMessage))
-				_buffer.WriteString(" messages</p>")
+				__buffer.WriteString("<p>")
+				__buffer.WriteSafe(u.Name)
+				__buffer.WriteString(" has ")
+				__buffer.WriteSafe(gorazor.Itoa(totalMessage))
+				__buffer.WriteString(" messages</p>")
 
 			}
 		} else {
 
-			_buffer.WriteString("<p>")
-			_buffer.WriteSafe(u.Name)
-			_buffer.WriteString(" has no messages</p>")
+			__buffer.WriteString("<p>")
+			__buffer.WriteSafe(u.Name)
+			__buffer.WriteString(" has no messages</p>")
 
 		}
 	}
@@ -46,24 +46,24 @@ func End() *razor.SafeBuffer {
 			if totalMessage > 0 {
 				if totalMessage == 1 {
 
-					_buffer.WriteString("<p>")
-					_buffer.WriteSafe(u.Name)
-					_buffer.WriteString(" has 1 message</p>")
+					__buffer.WriteString("<p>")
+					__buffer.WriteSafe(u.Name)
+					__buffer.WriteString(" has 1 message</p>")
 
 				} else {
 
-					_buffer.WriteString("<p>")
-					_buffer.WriteSafe(u.Name)
-					_buffer.WriteString(" has ")
-					_buffer.WriteSafe(gorazor.Itoa(totalMessage))
-					_buffer.WriteString(" messages</p>")
+					__buffer.WriteString("<p>")
+					__buffer.WriteSafe(u.Name)
+					__buffer.WriteString(" has ")
+					__buffer.WriteSafe(gorazor.Itoa(totalMessage))
+					__buffer.WriteString(" messages</p>")
 
 				}
 			} else {
 
-				_buffer.WriteString("<p>")
-				_buffer.WriteSafe(u.Name)
-				_buffer.WriteString(" has no messages</p>")
+				__buffer.WriteString("<p>")
+				__buffer.WriteSafe(u.Name)
+				__buffer.WriteString(" has no messages</p>")
 
 			}
 		}
@@ -72,41 +72,41 @@ func End() *razor.SafeBuffer {
 		switch totalMessage {
 		case 1:
 
-			_buffer.WriteString("<p>")
-			_buffer.WriteSafe(u.Name)
-			_buffer.WriteString(" has 1  message</p>")
+			__buffer.WriteString("<p>")
+			__buffer.WriteSafe(u.Name)
+			__buffer.WriteString(" has 1  message</p>")
 
 		case 2:
 
-			_buffer.WriteString("<p>")
-			_buffer.WriteSafe(u.Name)
-			_buffer.WriteString(" has 2 messages</p>")
+			__buffer.WriteString("<p>")
+			__buffer.WriteSafe(u.Name)
+			__buffer.WriteString(" has 2 messages</p>")
 
 		default:
 
-			_buffer.WriteString("<p>")
-			_buffer.WriteSafe(u.Name)
-			_buffer.WriteString(" has no messages</p>")
+			__buffer.WriteString("<p>")
+			__buffer.WriteSafe(u.Name)
+			__buffer.WriteString(" has no messages</p>")
 
 		}
 	}
-	_buffer.WriteSafe(helper.Footer())
+	__buffer.WriteSafe(helper.Footer())
 
-	title := func() *razor.SafeBuffer {
-		_buffer := razor.NewSafeBuffer()
+	__title := func() *razor.SafeBuffer {
+		__buffer := razor.NewSafeBuffer()
 
-		_buffer.WriteString("<title>")
-		_buffer.WriteSafe(u.Name)
-		_buffer.WriteString("'s homepage</title>")
+		__buffer.WriteString("<title>")
+		__buffer.WriteSafe(u.Name)
+		__buffer.WriteString("'s homepage</title>")
 
-		return _buffer
+		return __buffer
 	}
 
-	side := func() *razor.SafeBuffer {
-		_buffer := razor.NewSafeBuffer()
+	__side := func() *razor.SafeBuffer {
+		__buffer := razor.NewSafeBuffer()
 
-		return _buffer
+		return __buffer
 	}
 
-	return _buffer
+	return __buffer
 }

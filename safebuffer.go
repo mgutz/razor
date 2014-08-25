@@ -37,3 +37,13 @@ func (self *SafeBuffer) WriteSafe(t interface{}) {
 		}
 	}
 }
+
+func (self *SafeBuffer) rewriteString(s string) {
+	self.Reset()
+	self.WriteString(s)
+}
+
+func (self *SafeBuffer) rewrite(bytes []byte) {
+	self.Reset()
+	self.Write(bytes)
+}

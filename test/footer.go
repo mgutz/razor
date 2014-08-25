@@ -8,8 +8,8 @@ import (
 
 // Footer is generated
 func Footer() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
-	_buffer.WriteString("<div>copyright 2014</div>")
+	__buffer := razor.NewSafeBuffer()
+	__buffer.WriteString("<div>copyright 2014</div>")
 
-	return _buffer
+	return __buffer
 }

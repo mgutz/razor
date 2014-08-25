@@ -10,39 +10,39 @@ import (
 
 // Index is generated
 func Index() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 	var users []*models.User
 	var total int
 	var limit int
 	var offset int
-	_buffer.WriteString("\n\n<h2 class=\"sub-header\">用户总数：")
-	_buffer.WriteSafe(gorazor.Itoa(total))
-	_buffer.WriteString("</h2>\n<div class=\"table-responsive\">\n	<table class=\"table table-striped\">\n		<thead>\n			<tr>\n				<th>名字</th>\n				<th>电邮</th>\n				<th>编辑</th>\n			</tr>\n		</thead>\n		<tbody>\n			")
+	__buffer.WriteString("\n\n<h2 class=\"sub-header\">用户总数：")
+	__buffer.WriteSafe(gorazor.Itoa(total))
+	__buffer.WriteString("</h2>\n<div class=\"table-responsive\">\n	<table class=\"table table-striped\">\n		<thead>\n			<tr>\n				<th>名字</th>\n				<th>电邮</th>\n				<th>编辑</th>\n			</tr>\n		</thead>\n		<tbody>\n			")
 	for _, u := range users {
 
-		_buffer.WriteString("<tr>\n				<td>")
-		_buffer.WriteSafe(u.Name)
-		_buffer.WriteString("</td>\n				<td>")
-		_buffer.WriteSafe(u.Email)
-		_buffer.WriteString("</td>\n				<td><a href=\"/admin/user/edit?id=")
-		_buffer.WriteSafe(u.ID.Hex())
-		_buffer.WriteString("\">编辑</a></td>\n			</tr>")
+		__buffer.WriteString("<tr>\n				<td>")
+		__buffer.WriteSafe(u.Name)
+		__buffer.WriteString("</td>\n				<td>")
+		__buffer.WriteSafe(u.Email)
+		__buffer.WriteString("</td>\n				<td><a href=\"/admin/user/edit?id=")
+		__buffer.WriteSafe(u.ID.Hex())
+		__buffer.WriteString("\">编辑</a></td>\n			</tr>")
 
 	}
-	_buffer.WriteString("\n		</tbody>\n	</table>\n</div>")
+	__buffer.WriteString("\n		</tbody>\n	</table>\n</div>")
 
-	js := func() *razor.SafeBuffer {
-		_buffer := razor.NewSafeBuffer()
-		return _buffer
+	__js := func() *razor.SafeBuffer {
+		__buffer := razor.NewSafeBuffer()
+		return __buffer
 	}
 
-	title := func() *razor.SafeBuffer {
-		_buffer := razor.NewSafeBuffer()
+	__title := func() *razor.SafeBuffer {
+		__buffer := razor.NewSafeBuffer()
 
-		_buffer.WriteString("用户管理")
+		__buffer.WriteString("用户管理")
 
-		return _buffer
+		return __buffer
 	}
 
-	return _buffer
+	return __buffer
 }

@@ -8,8 +8,8 @@ import (
 
 // Var is generated
 func Var() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 	var totalMessage int
 
-	return _buffer
+	return __buffer
 }

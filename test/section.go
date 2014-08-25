@@ -8,19 +8,19 @@ import (
 
 // Section is generated
 func Section() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
-	_buffer.WriteString("\n\n<h1>Hello</h1>")
+	__buffer := razor.NewSafeBuffer()
+	__buffer.WriteString("\n\n<h1>Hello</h1>")
 
-	side := func() *razor.SafeBuffer {
-		_buffer := razor.NewSafeBuffer()
+	__side := func() *razor.SafeBuffer {
+		__buffer := razor.NewSafeBuffer()
 
-		_buffer.WriteString("<p>side</p>")
+		__buffer.WriteString("<p>side</p>")
 
-		return _buffer
+		return __buffer
 	}
 
-	_sections := make(razor.Sections)
-	_sections["side"] = side()
-	_buffer = SectionLayout(_buffer, &_sections)
-	return _buffer
+	__sections := make(razor.Sections)
+	__sections["side"] = __side()
+	__buffer = SectionLayout(__buffer, &__sections)
+	return __buffer
 }

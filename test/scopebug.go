@@ -11,7 +11,7 @@ import (
 
 // Scopebug is generated
 func Scopebug() *razor.SafeBuffer {
-	_buffer := razor.NewSafeBuffer()
+	__buffer := razor.NewSafeBuffer()
 	var obj *models.Widget
 	{
 		if 1 == 2 {
@@ -20,10 +20,10 @@ func Scopebug() *razor.SafeBuffer {
 			for _, v := range values {
 				if v, ok := v.(type); ok {
 
-					_buffer.WriteString("<a>\n					")
+					__buffer.WriteString("<a>\n					")
 					for _, v := range values {
 					}
-					_buffer.WriteString("\n				</a>")
+					__buffer.WriteString("\n				</a>")
 
 				} else {
 
@@ -32,5 +32,5 @@ func Scopebug() *razor.SafeBuffer {
 		}
 	}
 
-	return _buffer
+	return __buffer
 }
