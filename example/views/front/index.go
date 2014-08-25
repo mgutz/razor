@@ -16,7 +16,7 @@ func Index(user *models.User) *razor.SafeBuffer {
 		"title": "Razor + Go = love",
 	}
 	_buffer.WriteString("\n\n<!-- helper.go -->")
-	_buffer.WriteSafe(views.Heading2("Razor rocks"))
+	_buffer.WriteSafe(views.Heading2("FOO Razor rocks"))
 	_buffer.WriteString("\n\n<p>Escaped: ")
 	_buffer.WriteSafe(views.UnsafeHello(user.Name))
 	_buffer.WriteString("</p>\n<p>Unescaped: ")
@@ -56,7 +56,7 @@ func Index(user *models.User) *razor.SafeBuffer {
 	if foobar == "" {
 	}
 	_buffer.WriteSafe((foo))
-	_buffer.WriteString("bar\n\n\n<h3>Escaping the @sign</h3>\n\n@robinwilliams You so funny!\n\n<h3>Server Side Comment</h3>\n\n*\nOur users whine so much but they got mula!\n*@\n\n\n<h3>Mixing expressions and text</h3>")
+	_buffer.WriteString("bar\n\n\n<h3>Escaping the @sign</h3>\n\n@robinwilliams You so funny!\n\n<h3>Server Side Comment</h3>\n\n\n\n\n<h3>Mixing expressions and text</h3>")
 
 	title := "Mr"
 	name := "Peabody"
