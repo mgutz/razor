@@ -5,6 +5,48 @@
 **razor** is a Go port of ASP.NET's Razor view engine with less magic.
 
 
+Layout
+
+```html
+@{
+    +params (title string, ...)
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@title</title>
+    <link rel="stylesheet" href="/@App["version"]/css/style.css">
+    @RenderSection("css")
+</head>
+<body>
+    <div class="container">@RenderBody()</div>
+    @RenderSection("js")
+</body>
+</html>
+```
+
+Page
+
+```html
+@{
+    +import (
+        "views/layout"
+    )
+    +params (name string)
+    +extends layout.Base("Welcome " + name, ...)
+}
+
+<h2>Welcome to homepage</h2>
+
+@section js {
+    <script>
+        alert('hello! @name')
+    </script>
+}
+```
+
 ## Why
 
 Why use Razor over the standard `"html/template"`? It depends.
@@ -24,6 +66,13 @@ Reasons to choose **html/template**
 -   Fast enough
 -   Standard
 
+## Benchmarks
+
+See `benchfiles/` directory
+
+    BenchmarkGoTemplate  200000	     13013 ns/op
+    BenchmarkRazor       500000	      4661 ns/op
+
 
 ## Usage
 
@@ -38,14 +87,6 @@ Running
 ```sh
 razor <folder or file> <output folder or file>
 ```
-
-
-## Benchmarks
-
-See `benchfiles/` directory
-
-    BenchmarkGoTemplate  200000	     13013 ns/op
-    BenchmarkRazor       500000	      4661 ns/op
 
 ## Layout & Views
 
