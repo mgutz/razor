@@ -17,7 +17,7 @@ func init() {
 }
 
 func Usage() {
-	fmt.Fprintf(os.Stderr, "usage: gorazor <input dir or file> <output dir or file> [-debug]\n")
+	fmt.Fprintf(os.Stderr, "usage: gorazor <input dir or file> [output dir or file] [-debug]\n")
 	flag.PrintDefaults()
 	os.Exit(2)
 }
@@ -30,9 +30,12 @@ func main() {
 	if debug {
 		options["Debug"] = true
 	}
-	if flag.NArg() >= 2 {
+	if flag.NArg() >= 1 {
 		var err error
 		arg1, arg2 := flag.Arg(0), flag.Arg(1)
+		if arg2 == "" {
+			arg2 = arg1
+		}
 		orig1, orig2 := arg1, arg2
 
 		if arg1 == "." {
