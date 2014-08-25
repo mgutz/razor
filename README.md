@@ -4,6 +4,27 @@
 **razor** is fast, reflection-less and escapes all values by default.
 **razor** is a Go port of ASP.NET's Razor view engine with less magic.
 
+
+## Why
+
+Why use Razor over the standard `"html/template"`? It depends.
+
+Reasons to choose **razor**:
+
+-   Compilation performed outside of code (watch and server reload with gosu)
+-   Almost 3x faster (see `benchfiles`)
+-   Templates become functions
+-   Use `go` syntax for everything.
+    `@for hobby := range hobbies {` instead of `{{ range $hobby := .Hobbies }}`
+-   Less reflection. Reflection is used when checking if a value should be
+    HTML escaped.
+
+Reasons to choose **html/template**
+
+-   Fast enough
+-   Standard
+
+
 ## Usage
 
 Install
