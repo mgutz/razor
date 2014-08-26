@@ -8,7 +8,11 @@ func Tasks(p *Project) {
 	p.Task("default", D{"views"})
 
 	p.Task("views", W{"example/views/**/*.go.html"}, func() {
-		Run("razor views", M{"Dir": "example"})
+		Run("razor example/views")
+	})
+
+	p.Task("views2", D{"build"}, W{"example2/**/*.go.html"}, func() {
+		Run("razor example2")
 	})
 
 	p.Task("example", D{"views", "build"}, W{"example/**/*.go"}, Debounce(3000), func() {
@@ -21,7 +25,7 @@ func Tasks(p *Project) {
 	})
 
 	p.Task("build", func() {
-		Run("go install")
+		//Run("go install")
 		Run("go install", M{"Dir": "cmd/razor"})
 	})
 }

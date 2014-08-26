@@ -10,8 +10,9 @@ import (
 )
 
 // Index is generated
-func Index(user *models.User) *razor.SafeBuffer {
+func Index(__data interface{}) *razor.SafeBuffer {
 	__buffer := razor.NewSafeBuffer()
+	user := __data.(*models.User)
 	data := razor.M{
 		"title": "Razor + Go = love",
 	}

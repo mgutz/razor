@@ -8,6 +8,10 @@ import (
 	"testing"
 )
 
+func init() {
+	Options.InterfaceArg = false
+}
+
 func TestCap(t *testing.T) {
 	if Capitalize("hello") != "Hello" {
 		t.Error()
@@ -64,8 +68,7 @@ func TestGenerate(t *testing.T) {
 			if !exists(dirname) {
 				os.MkdirAll(dirname, 0755)
 			}
-			option := Option{}
-			GenFile(path, log, option)
+			GenFile(path, log)
 			if !exists(cmp) {
 				t.Error("No cmp:", cmp)
 			} else if !exists(log) {

@@ -67,14 +67,44 @@ func main() {
 ```
 
 
+There are two ways to render a template
+
+1.  By name. This is useful when the name of the view is dynamic such as a value from a URL segment.
+    This function is defined in `razor_render.go` in each package.
+
+        `pkg.Render("index", data).WriteTo(w)`
+
+2.  By func (slightly faster). `pkg.Index(data).WriteTo(w)`
+
+
+The default code generation accepts a single `interface{}` argument and performs a type assertion like this.
+
+    // +params (user *model.User)
+    func GeneratedFunc(__data interface) *razor.SafeBuffer {
+        user := __data.(*model.User)
+        ...
+    }
+
+This is necessary for the `Render(name string, data interface{})` function to work. If you run
+`razor --strong SOME_DIR` no type assertions are used and unlimited arguments are allowed.
+It will be faster too but in reality `Render` is more practical.
+
+    // +params (user *model.User, other string)
+    func GeneratedFunc(user *model.User, other string) *razor.SafeBuffer {
+        ...
+    }
+
+
 ## Why
 
 Why use Razor over the standard `"html/template"`? It depends.
 
 **razor**
 
--   Speed, almost 3x faster (see `benchfiles`)
+-   Speed, between 3-3.5x faster (see `benchfiles`)
 -   Templates become functions
+-   Use any package of helper functions directly in templates.
+    Note that all inserted values are escaped unless it returns a *razor.SafeBuffer.
 -   Use `go` syntax for everything.
     `@for hobby := range hobbies {` instead of `{{ range $hobby := .Hobbies }}`
 -   Less reflection. Reflection is used only for HTML escaping.
@@ -87,10 +117,13 @@ Why use Razor over the standard `"html/template"`? It depends.
 
 ## Benchmarks
 
-See `benchfiles/` directory
+See `benchfiles/` directory. Run with `go test -bench=.`
 
-    BenchmarkGoTemplate     200000     13148 ns/op
-    BenchmarkRazor          500000      4636 ns/op
+On 2011 i5 Macbook Pro
+
+    BenchmarkGoTemplate     100000     31107 ns/op
+    BenchmarkRazorByName    200000      9092 ns/op
+    BenchmarkRazorByFunc    200000      8243 ns/op
 
 ## Usage
 

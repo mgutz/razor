@@ -10,6 +10,6 @@ type User struct {
 var user = &User{
 	FirstName: "Joe",
 	LastName:  "Seabee",
-	Hobbies:   []string{"running", "diving"},
+	Hobbies:   []string{"running", "scuba", "rock climbing"},
 	Age:       21,
 }

@@ -9,11 +9,12 @@ import (
 	"github.com/mgutz/razor"
 )
 
-var configFile string
 var debug bool
+var strongType bool
 
 func init() {
 	flag.BoolVar(&debug, "debug", false, "print debug info")
+	flag.BoolVar(&strongType, "strong", false, "generate strong typed function args")
 }
 
 func Usage() {
@@ -25,11 +26,8 @@ func Usage() {
 func main() {
 	flag.Usage = Usage
 	flag.Parse()
-	options := razor.Option{}
-
-	if debug {
-		options["Debug"] = true
-	}
+	razor.Options.Debug = debug
+	razor.Options.InterfaceArg = !strongType
 	if flag.NArg() >= 1 {
 		var err error
 		arg1, arg2 := flag.Arg(0), flag.Arg(1)
@@ -61,13 +59,13 @@ func main() {
 		}
 		if stat.IsDir() {
 			fmt.Printf("Gorazor processing dir: %s -> %s\n", orig1, orig2)
-			err := razor.GenFolder(arg1, arg2, options)
+			err := razor.GenFolder(arg1, arg2)
 			if err != nil {
 				fmt.Println(err)
 			}
 		} else if stat.Mode().IsRegular() {
 			fmt.Printf("Gorazor processing file: %s -> %s\n", orig1, orig2)
-			razor.GenFile(arg1, arg2, options)
+			razor.GenFile(arg1, arg2)
 		} else {
 			flag.Usage()
 		}

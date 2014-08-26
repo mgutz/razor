@@ -7,8 +7,9 @@ import (
 )
 
 // Index is generated
-func Index(u *User) *razor.SafeBuffer {
+func Index(__data interface{}) *razor.SafeBuffer {
 	__buffer := razor.NewSafeBuffer()
+	u := __data.(*User)
 	__buffer.WriteString("\n<h1>Hoge</h1>\n<p>\n  I'm Hoge.\n</p>")
 
 	__scripts := func() *razor.SafeBuffer {

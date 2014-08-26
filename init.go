@@ -13,3 +13,13 @@ func SetAppState(state map[string]interface{}) {
 
 // Sections holds rendered content of sections for a template.
 type Sections map[string]*SafeBuffer
+
+// RazorOptions are options which affect code generation
+type RazorOptions struct {
+	// Debug indicates whether to print diagnostics.
+	Debug bool
+	// GenericArg indicates to use a single interface{} argument for templates.
+	InterfaceArg bool
+}
+
+var Options = &RazorOptions{}
