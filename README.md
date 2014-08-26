@@ -60,7 +60,8 @@ func main() {
         "version": "1.0.0",
     })
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        views.Index("Joe").WriteTo(w)
+        views.Render("index", "Joe").WriteTo(w)
+        // or views.Index("Joe").WriteTo(w)
     }
     http.ListenAndServe(":8080", nil)
 }
