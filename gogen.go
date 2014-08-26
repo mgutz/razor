@@ -119,11 +119,15 @@ func makeCompiler(ast *Ast, input string) *Compiler {
 	pkg := filepath.Base(dir)
 	baseName := strings.Replace(filepath.Base(input), gz_extension, "", 1)
 	funcName := Capitalize(baseName)
+	params := "()"
+	if Options.InterfaceArg {
+		params = "(__data interface{})"
+	}
 	cp := &Compiler{
 		ast:      ast,
 		buf:      "",
 		firstBLK: 0,
-		params:   "()",
+		params:   params,
 		parts:    []Part{},
 		imports:  map[string]bool{},
 		dir:      dir,
@@ -182,12 +186,16 @@ func (cp *Compiler) visitFirstBLK(blk *Ast) {
 					parts := strings.Split(firstArg, " ")
 					name, typ := parts[0], parts[1]
 					if typ != "interface{}" {
-						cp.dataAssertionType = name + " := __data.(" + typ + ")\n"
+						if name != "_" {
+							cp.dataAssertionType = name + " := __data.(" + typ + ")\n"
+						}
 						vname = strings.Replace(vname, firstArg, "__data interface{}", 1)
 					}
 				}
+				cp.isLayout = strings.Contains(vname, ",")
+			} else {
+				cp.isLayout = strings.Contains(vname, "...)")
 			}
-			cp.isLayout = strings.Contains(vname, "...)")
 			cp.params = strings.Replace(vname, "...)", "__body *razor.SafeBuffer, __sections *razor.Sections)", 1)
 		} else if strings.HasPrefix(l, "+extends ") {
 			vname := l[9:]

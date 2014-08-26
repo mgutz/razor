@@ -13,6 +13,9 @@ func Render(path string, model interface{}) *razor.SafeBuffer {
 	default:
 		return razor.NewSafeBufferString("Invalid template: " + path)
 
+	case "empty":
+		return Empty(model)
+
 	case "index":
 		return Index(model)
 
