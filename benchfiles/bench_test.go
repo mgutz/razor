@@ -9,34 +9,22 @@ import (
 
 var indexTmpl = template.Must(template.New("index").ParseFiles("layout.tmpl", "index.tmpl"))
 
-func goTemplate() {
-	var html string
+func goTemplate() bytes.Buffer {
 	var w bytes.Buffer
 	indexTmpl.ExecuteTemplate(&w, "layout", user)
-	html = w.String()
-	//fmt.Println("go", html)
-	if html == "" {
-	}
+	return w
 }
 
-func razorRenderByFunc() {
-	var html string
+func razorRenderByFunc() bytes.Buffer {
 	var w bytes.Buffer
 	Index(user).WriteTo(&w)
-	html = w.String()
-	//fmt.Println("razor", html)
-	if html == "" {
-	}
+	return w
 }
 
-func razorRenderByName() {
-	var html string
+func razorRenderByName() bytes.Buffer {
 	var w bytes.Buffer
 	Render("index", user).WriteTo(&w)
-	html = w.String()
-	//fmt.Println("razor", html)
-	if html == "" {
-	}
+	return w
 }
 
 func BenchmarkGoTemplate(b *testing.B) {

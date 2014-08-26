@@ -21,7 +21,7 @@ func Tasks(p *Project) {
 
 	p.Task("bench", D{"build"}, func() {
 		Run("razor benchfiles")
-		Run("go test -bench=.", M{"Dir": "benchfiles"})
+		Run("go test -bench . -benchmem", M{"Dir": "benchfiles"})
 	})
 
 	p.Task("build", func() {
