@@ -545,9 +545,9 @@ func writeRazorRenderGoFile() {
 			model.Funcs[basename] = Capitalize(basename)
 		}
 
-		tmpl, err := template.New("test").Parse(doNotEdit + razorRenderTemplate)
+		tmpl, err := template.New("razorRenderTemplate").Parse(doNotEdit + razorRenderTemplate)
 		if err != nil {
-			fmt.Errorf("Could not compile template razorRenderTemplate")
+			fmt.Errorf("Could not compile razorRenderTemplate")
 		}
 		var buf bytes.Buffer
 		tmpl.Execute(&buf, model)

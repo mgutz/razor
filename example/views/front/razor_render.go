@@ -6,6 +6,8 @@ import (
 	"github.com/mgutz/razor"
 )
 
+// Render returns the generated template function for a given path.
+// Layouts are not included.
 func Render(path string, model interface{}) *razor.SafeBuffer {
 	switch path {
 	default:

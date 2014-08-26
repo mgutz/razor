@@ -13,7 +13,7 @@ type SafeBuffer struct {
 
 // NewSafeBuffer creates a new SafeBuffer.
 func NewSafeBuffer() *SafeBuffer {
-	return &SafeBuffer{Buffer: bytes.NewBuffer(nil)}
+	return &SafeBuffer{Buffer: new(bytes.Buffer)}
 }
 
 // NewSafeBufferString creates a new SafeBuffer from string.
@@ -22,28 +22,30 @@ func NewSafeBufferString(s string) *SafeBuffer {
 }
 
 // WriteSafe writes the escaped value to the buffer.
-func (self *SafeBuffer) WriteSafe(t interface{}) {
+func (sbuf *SafeBuffer) WriteSafe(t interface{}) {
 	switch v := t.(type) {
 	case *SafeBuffer:
 		if v != nil {
-			self.Write(v.Bytes())
+			sbuf.Write(v.Bytes())
 		}
 	case bytes.Buffer:
-		template.HTMLEscape(self.Buffer, v.Bytes())
+		template.HTMLEscape(sbuf.Buffer, v.Bytes())
 	default:
 		s := template.HTMLEscaper(v)
 		if len(s) > 0 && s != "&lt;no value&gt;" {
-			self.WriteString(s)
+			sbuf.WriteString(s)
 		}
 	}
 }
 
-func (self *SafeBuffer) rewriteString(s string) {
-	self.Reset()
-	self.WriteString(s)
+// RewriteString resets and writes s to the buffer.
+func (sbuf *SafeBuffer) RewriteString(s string) {
+	sbuf.Reset()
+	sbuf.WriteString(s)
 }
 
-func (self *SafeBuffer) rewrite(bytes []byte) {
-	self.Reset()
-	self.Write(bytes)
+// Rewrite resets and writes bytes to the buffer.
+func (sbuf *SafeBuffer) Rewrite(bytes []byte) {
+	sbuf.Reset()
+	sbuf.Write(bytes)
 }
