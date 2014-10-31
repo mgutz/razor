@@ -53,25 +53,23 @@ E-mail is special case that is recognized by Razor.
 
 <h3>Explicit expression</h3>
 
-@{ foo := "foo" }
 @{
+    foo := "foo"
     foobar := "xxxxxx"
     if foobar == "" {}
 }
 
 @(foo)bar
 
-
 <h3>Escaping the @@sign</h3>
 
 @@robinwilliams You so funny!
 
 <h3>Server Side Comment</h3>
-
 @*
-Our users whine so much but they got mula!
+Our users whine so much but they got mula!!!
 *@
-This should be the only line
+We love our users.
 
 <h3>Mixing expressions and text</h3>
 @{

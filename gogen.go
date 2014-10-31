@@ -57,7 +57,6 @@ var renderData = renderInfo{dirBasenames: make(map[string][]string)}
 type Compiler struct {
 	ast                 *Ast
 	buf                 string //the final result
-	layout              string
 	firstBLK            int
 	params              string
 	parts               []Part

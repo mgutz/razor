@@ -22,4 +22,5 @@ type RazorOptions struct {
 	InterfaceArg bool
 }
 
+// Options are the configurable options for Razor.
 var Options = &RazorOptions{}

@@ -58,13 +58,13 @@ func main() {
 			os.Exit(2)
 		}
 		if stat.IsDir() {
-			fmt.Printf("Gorazor processing dir: %s -> %s\n", orig1, orig2)
+			fmt.Printf("razor processing dir: %s -> %s\n", orig1, orig2)
 			err := razor.GenFolder(arg1, arg2)
 			if err != nil {
 				fmt.Println(err)
 			}
 		} else if stat.Mode().IsRegular() {
-			fmt.Printf("Gorazor processing file: %s -> %s\n", orig1, orig2)
+			fmt.Printf("razor processing file: %s -> %s\n", orig1, orig2)
 			razor.GenFile(arg1, arg2)
 		} else {
 			flag.Usage()

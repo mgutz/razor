@@ -51,13 +51,13 @@ func Index(__data interface{}) *razor.SafeBuffer {
 	__buffer.WriteString("\n<p>mario@mgutz.com</p>\n<p>mario")
 	__buffer.WriteSafe(domain)
 	__buffer.WriteString("</p>\n\n<h3>Explicit expression</h3>")
-	foo := "foo"
 
+	foo := "foo"
 	foobar := "xxxxxx"
 	if foobar == "" {
 	}
 	__buffer.WriteSafe((foo))
-	__buffer.WriteString("bar\n\n\n<h3>Escaping the @sign</h3>\n\n@robinwilliams You so funny!\n\n<h3>Server Side Comment</h3>\n\n\nThis should be the only line\n\n<h3>Mixing expressions and text</h3>")
+	__buffer.WriteString("bar\n\n<h3>Escaping the @sign</h3>\n\n@robinwilliams You so funny!\n\n<h3>Server Side Comment</h3>\n\nWe love our users.\n\n<h3>Mixing expressions and text</h3>")
 
 	title := "Mr"
 	name := "Peabody"
