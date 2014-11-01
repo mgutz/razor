@@ -1,7 +1,7 @@
 package main
 
 import (
-	. "github.com/mgutz/gosu"
+	. "github.com/mgutz/godo"
 )
 
 func Tasks(p *Project) {
@@ -26,5 +26,5 @@ func Tasks(p *Project) {
 }
 
 func main() {
-	Gosu(Tasks)
+	Godo(Tasks)
 }
